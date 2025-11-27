@@ -4,11 +4,20 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
+    "prebuild": "astro run ./scripts/generate-search-index.mjs",
     "build": "astro build",
     "preview": "astro preview",
+    "start": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.13.4"
+    "@tailwindcss/vite": "^4.1.12",
+    "astro": "^5.13.4",
+    "playwright": "^1.55.0",
+    "rehype-mermaid": "^3.0.0",
+    "tailwindcss": "^4.1.12"
+  },
+  "devDependencies": {
+    "kleur": "^4.1.5"
   }
 }
