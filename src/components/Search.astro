@@ -1,0 +1,53 @@
+---
+---
+<div class="relative">
+    <input 
+        type="text" 
+        id="search-input"
+        placeholder="Search..." 
+        class="bg-gray-800 text-white rounded-md px-4 py-2 w-full"
+    >
+    <ul id="search-results" class="absolute top-full left-0 right-0 bg-gray-700 rounded-md mt-2 p-2 hidden"></ul>
+</div>
+
+<script>
+    const searchInput = document.getElementById('search-input') as HTMLInputElement;
+    const searchResults = document.getElementById('search-results') as HTMLUListElement;
+    let searchIndex: any[] = [];
+
+    fetch('/search-index.json')
+        .then(response => response.json())
+        .then(data => {
+            searchIndex = data;
+        });
+
+    searchInput.addEventListener('input', () => {
+        const query = searchInput.value.toLowerCase();
+        if (query.length < 2) {
+            searchResults.innerHTML = '';
+            searchResults.classList.add('hidden');
+            return;
+        }
+
+        const results = searchIndex.filter(item => 
+            item.title.toLowerCase().includes(query) ||
+            item.content.toLowerCase().includes(query)
+        );
+
+        searchResults.innerHTML = '';
+        if (results.length > 0) {
+            searchResults.classList.remove('hidden');
+            results.forEach(result => {
+                const li = document.createElement('li');
+                const a = document.createElement('a');
+                a.href = `/docs/${result.slug}`;
+                a.textContent = result.title;
+                a.className = 'block hover:bg-gray-600 p-2 rounded-md';
+                li.appendChild(a);
+                searchResults.appendChild(li);
+            });
+        } else {
+            searchResults.classList.add('hidden');
+        }
+    });
+</script>

@@ -1,0 +1,117 @@
+---
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Sidebar from "../components/Sidebar.astro";
+import Footer from "../components/Footer.astro";
+import TableOfContents from "../components/TableOfContents.astro";
+
+const { frontmatter, headings, title, description } = Astro.props;
+const pageTitle = title || frontmatter?.title || "AstroDocs";
+const pageDescription = description || frontmatter?.description || "";
+---
+
+<html lang="en" class="scroll-smooth">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+        <title>{pageTitle} - AstroDocs</title>
+        <script is:inline>
+            const getThemePreference = () => {
+                if (
+                    typeof localStorage !== "undefined" &&
+                    localStorage.getItem("theme")
+                ) {
+                    return localStorage.getItem("theme");
+                }
+                return window.matchMedia("(prefers-color-scheme: dark)").matches
+                    ? "dark"
+                    : "light";
+            };
+            const isDark = getThemePreference() === "dark";
+            document.documentElement.classList[isDark ? "add" : "remove"](
+                "dark",
+            );
+
+            if (typeof localStorage !== "undefined") {
+                const observer = new MutationObserver(() => {
+                    const isDark =
+                        document.documentElement.classList.contains("dark");
+                    localStorage.setItem("theme", isDark ? "dark" : "light");
+                });
+                observer.observe(document.documentElement, {
+                    attributes: true,
+                    attributeFilter: ["class"],
+                });
+            }
+        </script>
+    </head>
+    <body class="bg-background text-foreground min-h-screen flex flex-col">
+        <Header />
+
+        <div class="flex flex-1 pt-16">
+            <aside
+                id="sidebar"
+                class="fixed inset-y-0 left-0 z-50 w-64 transform bg-background border-r border-border transition-transform duration-300 ease-in-out -translate-x-full md:translate-x-0 md:sticky md:top-16 md:h-[calc(100vh-4rem)] md:overflow-y-auto pt-16 md:pt-0"
+            >
+                <Sidebar />
+            </aside>
+
+            <div
+                id="sidebar-backdrop"
+                class="fixed inset-0 z-40 bg-background/80 backdrop-blur-sm md:hidden hidden"
+                aria-hidden="true"
+            >
+            </div>
+
+            <main class="flex-1 min-w-0">
+                <div
+                    class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex gap-10"
+                >
+                    <article
+                        class="flex-1 prose dark:prose-invert max-w-none prose-headings:scroll-mt-20 prose-a:text-primary hover:prose-a:text-primary/80"
+                    >
+                        <h1 class="text-4xl font-bold tracking-tight mb-4">
+                            {pageTitle}
+                        </h1>
+                        <p class="text-xl text-muted-foreground mb-8">
+                            {pageDescription}
+                        </p>
+                        <slot />
+                    </article>
+
+                    <aside class="hidden xl:block w-64 flex-shrink-0">
+                        <div class="sticky top-24">
+                            <h2 class="font-semibold mb-4 text-sm">
+                                On this page
+                            </h2>
+                            <TableOfContents headings={headings} />
+                        </div>
+                    </aside>
+                </div>
+                <Footer />
+            </main>
+        </div>
+
+        <script>
+            const sidebar = document.getElementById("sidebar");
+            const backdrop = document.getElementById("sidebar-backdrop");
+            const toggleButton = document.getElementById("sidebar-toggle");
+
+            function toggleSidebar() {
+                const isOpen = !sidebar.classList.contains("-translate-x-full");
+                if (isOpen) {
+                    sidebar.classList.add("-translate-x-full");
+                    backdrop.classList.add("hidden");
+                    document.body.style.overflow = "";
+                } else {
+                    sidebar.classList.remove("-translate-x-full");
+                    backdrop.classList.remove("hidden");
+                    document.body.style.overflow = "hidden";
+                }
+            }
+
+            toggleButton?.addEventListener("click", toggleSidebar);
+            backdrop?.addEventListener("click", toggleSidebar);
+        </script>
+    </body>
+</html>
