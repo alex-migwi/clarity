@@ -1,0 +1,49 @@
+---
+// src/pages/dashboard.astro
+import Layout from '../layouts/DocLayout.astro';
+
+const backendUrl = 'http://localhost:3000';
+
+let user = null;
+try {
+    const response = await fetch(`${backendUrl}/auth/user`, {
+        credentials: 'include' // Send cookies with the request
+    });
+    if (response.ok) {
+        user = await response.json();
+    }
+} catch (error) {
+    console.error('Error fetching user data:', error);
+}
+---
+
+<Layout title="Dashboard">
+    <div class="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+        <div class="p-8 bg-white rounded shadow-md w-96">
+            <h1 class="text-2xl font-bold mb-6 text-center">Dashboard</h1>
+
+            {user ? (
+                <div class="text-center">
+                    <p class="mb-2">Welcome, {user.displayName || user.username}!</p>
+                    <p class="text-sm text-gray-600 mb-4">Email: {user.emails && user.emails[0] ? user.emails[0].value : 'N/A'}</p>
+                    <a
+                        href={`${backendUrl}/auth/logout`}
+                        class="inline-block px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-red-600 hover:bg-red-700"
+                    >
+                        Logout
+                    </a>
+                </div>
+            ) : (
+                <div class="text-center">
+                    <p class="mb-4">You are not logged in.</p>
+                    <a
+                        href="/login"
+                        class="inline-block px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700"
+                    >
+                        Go to Login
+                    </a>
+                </div>
+            )}
+        </div>
+    </div>
+</Layout>
