@@ -32,97 +32,127 @@ This is a danger callout. Use for critical warnings that need immediate attentio
 This is a success/tip callout. Perfect for pro tips and best practices!
 :::
 
-## Tabs
-
-Use tabs to show multiple code examples or options:
-
-import Tabs from '../../../components/Tabs.astro';
-import TabPanel from '../../../components/TabPanel.astro';
-
-<Tabs>
-  <TabPanel label="JavaScript">
-    ```javascript
-    function greet(name) {
-      console.log(`Hello, ${name}!`);
-    }
-    
-    greet('World');
-    ```
-  </TabPanel>
-  <TabPanel label="TypeScript">
-    ```typescript
-    function greet(name: string): void {
-      console.log(`Hello, ${name}!`);
-    }
-    
-    greet('World');
-    ```
-  </TabPanel>
-  <TabPanel label="Python">
-    ```python
-    def greet(name):
-        print(f"Hello, {name}!")
-    
-    greet("World")
-    ```
-  </TabPanel>
-</Tabs>
-
 ## Code Blocks with Copy
 
 All code blocks automatically get a copy button on hover:
 
-```bash
+\`\`\`bash
 # Clone the repository
-git clone https://github.com/yourorg/yourrepo.git
-cd yourrepo
+git clone https://github.com/alex-migwi/clarity.git
+cd clarity
 
 # Install dependencies
 pnpm install
 
 # Start development server
 pnpm dev
-```
+\`\`\`
+
+### Multiple Language Examples
+
+**JavaScript:**
+\`\`\`javascript
+function greet(name) {
+  console.log(\`Hello, \${name}!\`);
+}
+
+greet('World');
+\`\`\`
+
+**TypeScript:**
+\`\`\`typescript
+function greet(name: string): void {
+  console.log(\`Hello, \${name}!\`);
+}
+
+greet('World');
+\`\`\`
+
+**Python:**
+\`\`\`python
+def greet(name):
+    print(f"Hello, {name}!")
+
+greet("World")
+\`\`\`
 
 ## Mermaid Diagrams
 
-Create flowcharts and diagrams:
+Create flowcharts and diagrams using Mermaid:
 
-```mermaid
+\`\`\`mermaid
 graph TD
     A[Start] --> B{Need Components?}
     B -->|Yes| C[Use Callouts]
-    B -->|Yes| D[Use Tabs]
+    B -->|Yes| D[Use Mermaid]
     C --> E[Better Docs]
     D --> E
     B -->|No| F[Continue Writing]
     E --> G[Happy Users]
     F --> G
-```
+\`\`\`
 
-## Combining Components
+## Advanced Mermaid Examples
 
-You can combine components for powerful documentation:
+### Sequence Diagram
 
-:::tip Custom Title
-**Pro Tip:** You can nest components!
+\`\`\`mermaid
+sequenceDiagram
+    participant User
+    participant Clarity
+    participant GitHub
+    
+    User->>Clarity: Write Documentation
+    Clarity->>User: Preview Changes
+    User->>GitHub: Commit & Push
+    GitHub->>Clarity: Trigger Deploy
+    Clarity->>User: Live Documentation
+\`\`\`
 
-<Tabs>
-  <TabPanel label="Installation">
-    ```bash
-    pnpm add clarity-components
-    ```
-  </TabPanel>
-  <TabPanel label="Usage">
-    ```typescript
-    import { Callout } from 'clarity-components';
-    ```
-  </TabPanel>
-</Tabs>
+### Class Diagram
+
+\`\`\`mermaid
+classDiagram
+    class Documentation {
+        +String title
+        +String content
+        +render()
+        +save()
+    }
+    class Component {
+        +String type
+        +render()
+    }
+    Documentation --> Component
+\`\`\`
+
+## Tables
+
+Create tables for structured data:
+
+| Feature | Description | Status |
+|---------|-------------|--------|
+| Callouts | Highlight important info | ✅ Available |
+| Code Blocks | Syntax highlighting | ✅ Available |
+| Mermaid | Diagrams and charts | ✅ Available |
+| Tables | Structured data | ✅ Available |
+| Dark Mode | Theme support | ✅ Available |
+
+## Best Practices
+
+:::tip
+**Component Guidelines:**
+
+1. Use callouts sparingly for important information
+2. Keep code examples concise and focused
+3. Use Mermaid for complex workflows
+4. Test all code examples before publishing
+5. Provide context for each component
 :::
 
 ## Next Steps
 
 - Explore the [Configuration Guide](./configuration)
-- Check out [Quick Start](./quick-start)
-- Learn about [Team Features](./introduction)
+- Check out [Quick Start](./quick-start)  
+- Learn about [Getting Started](./getting-started)
+- Deploy with the [Deployment Guide](./deployment)
