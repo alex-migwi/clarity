@@ -62,6 +62,13 @@ Focus on improving search capabilities and content discovery.
   - Recently updated pages widget
   - Tag-based filtering
 
+- 🎯 **Protected Documentation**
+  - Astro middleware for authentication checks
+  - Route-based access control (public vs protected pages)
+  - Configurable authentication requirements per route
+  - Automatic redirect to login for protected content
+  - Session management with cookie-based auth
+
 ---
 
 ## Version 1.2 - Collaboration Features 🎯
