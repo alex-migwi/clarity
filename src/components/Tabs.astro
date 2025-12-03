@@ -1,0 +1,89 @@
+---
+interface Props {
+  defaultTab?: string;
+}
+
+const { defaultTab } = Astro.props;
+const slots = await Astro.slots.render('default');
+---
+
+<div class="not-prose my-6 tabs-container" data-default-tab={defaultTab}>
+  <div class="flex flex-wrap gap-2 border-b border-border mb-4">
+    <!-- Tabs will be dynamically generated -->
+  </div>
+  <div class="tab-content">
+    <slot />
+  </div>
+</div>
+
+<script>
+  function initTabs() {
+    const containers = document.querySelectorAll('.tabs-container');
+    
+    containers.forEach((container) => {
+      const tabContent = container.querySelector('.tab-content');
+      const tabButtons = container.querySelector('.flex.flex-wrap');
+      
+      if (!tabContent || !tabButtons) return;
+
+      // Find all TabPanel components
+      const panels = Array.from(tabContent.children).filter(
+        (child) => child.hasAttribute('data-tab-panel')
+      );
+
+      if (panels.length === 0) return;
+
+      // Create tab buttons
+      panels.forEach((panel, index) => {
+        const label = panel.getAttribute('data-label') || `Tab ${index + 1}`;
+        const tabId = panel.getAttribute('data-tab-id') || `tab-${index}`;
+
+        const button = document.createElement('button');
+        button.className = 'px-4 py-2 text-sm font-medium rounded-t-lg transition-colors';
+        button.setAttribute('data-tab-button', tabId);
+        button.textContent = label;
+        
+        if (index === 0) {
+          button.classList.add('bg-primary', 'text-primary-foreground');
+        } else {
+          button.classList.add('text-muted-foreground', 'hover:text-foreground', 'hover:bg-muted/50');
+        }
+
+        button.addEventListener('click', () => {
+          // Update buttons
+          container.querySelectorAll('[data-tab-button]').forEach((btn) => {
+            btn.classList.remove('bg-primary', 'text-primary-foreground');
+            btn.classList.add('text-muted-foreground', 'hover:text-foreground', 'hover:bg-muted/50');
+          });
+          button.classList.remove('text-muted-foreground', 'hover:text-foreground', 'hover:bg-muted/50');
+          button.classList.add('bg-primary', 'text-primary-foreground');
+
+          // Update panels
+          panels.forEach((p) => p.classList.add('hidden'));
+          panel.classList.remove('hidden');
+        });
+
+        tabButtons.appendChild(button);
+      });
+
+      // Show first panel by default
+      panels.forEach((panel, index) => {
+        if (index !== 0) {
+          panel.classList.add('hidden');
+        }
+      });
+    });
+  }
+
+  // Initialize on page load
+  initTabs();
+
+  // Re-initialize on page transitions
+  document.addEventListener('astro:page-load', initTabs);
+</script>
+
+<style>
+  .tabs-container :global(pre) {
+    margin-top: 0;
+  }
+</style>

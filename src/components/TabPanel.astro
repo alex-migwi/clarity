@@ -1,0 +1,13 @@
+---
+interface Props {
+  label: string;
+  id?: string;
+}
+
+const { label, id } = Astro.props;
+const tabId = id || label.toLowerCase().replace(/\s+/g, '-');
+---
+
+<div data-tab-panel data-label={label} data-tab-id={tabId} class="tab-panel">
+  <slot />
+</div>
