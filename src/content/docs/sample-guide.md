@@ -170,13 +170,11 @@ Content for tab 2
 
 Clarity supports Mermaid for diagrams:
 
-````markdown
 ```mermaid
 graph TD
     A[Start] --> B[Process]
     B --> C[End]
 ```
-````
 
 ## Best Practices
 
