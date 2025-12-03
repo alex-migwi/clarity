@@ -1,6 +1,6 @@
 ---
 title: Introduction
-description: Welcome to AstroDocs, a premium documentation template.
+description: Welcome to Clarity, a premium documentation platform for teams.
 order: 1
 draft: false
 image: ""

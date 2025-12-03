@@ -1,14 +1,14 @@
 ---
-title: "Getting Started with AstroDocs"
-description: "A comprehensive guide to using the new AstroDocs features, including the Table of Contents, code highlighting, and responsive design."
-order: 20
+title: "Writing Documentation"
+description: "A comprehensive guide to using Clarity's features, including the Table of Contents, code highlighting, and responsive design."
+order: 30
 draft: false
 image: ""
 ---
 
 # Introduction
 
-Welcome to **AstroDocs**! This is a sample document designed to demonstrate the capabilities of our newly upgraded documentation site.
+Welcome to **Clarity**! This is a sample document designed to demonstrate the capabilities of our modern documentation platform.
 
 ## Features Overview
 
@@ -21,7 +21,7 @@ We've packed a lot of great features into this release:
 
 ## Code Highlighting
 
-AstroDocs supports syntax highlighting for code blocks. Here's an example in JavaScript:
+Clarity supports syntax highlighting for code blocks. Here's an example in JavaScript:
 
 ```javascript
 function greet(name) {

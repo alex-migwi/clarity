@@ -1,6 +1,6 @@
 ---
 title: Getting Started
-description: Learn how to set up and use AstroDocs.
+description: Learn how to set up and use Clarity.
 order: 10
 draft: false
 image: ""
