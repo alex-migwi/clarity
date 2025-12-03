@@ -5,7 +5,8 @@ import rehypeMermaid from 'rehype-mermaid';
 
 // https://astro.build/config
 export default defineConfig({
-  site: process.env.PUBLIC_SITE_URL || 'http://localhost:4321',
+  site: process.env.PUBLIC_SITE_URL || 'https://alex-migwi.github.io',
+  base: '/clarity-docs',
   integrations: [],
   markdown: {
     syntaxHighlight: {

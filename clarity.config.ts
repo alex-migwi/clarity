@@ -8,7 +8,7 @@ export const clarityConfig = {
   site: {
     name: "Clarity",
     description: "A premium documentation platform for teams",
-    url: process.env.PUBLIC_SITE_URL || "https://clarity.example.com",
+    url: process.env.PUBLIC_SITE_URL || "https://alex-migwi.github.io/clarity-docs",
     logo: "/logo.svg", // Path to your logo
   },
 
