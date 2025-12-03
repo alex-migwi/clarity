@@ -96,13 +96,13 @@ PUBLIC_BACKEND_URL=http://localhost:3000
 
 # === GITHUB INTEGRATION ===
 # Your GitHub repository (format: username/repo-name)
-PUBLIC_GITHUB_REPO=myusername/my-repo
+CLARITY_GITHUB_REPO=myusername/my-repo
 
 # Branch name for "Edit on GitHub" links
-PUBLIC_GITHUB_BRANCH=main
+CLARITY_GITHUB_BRANCH=main
 
 # Path to docs folder within your repo
-PUBLIC_GITHUB_DOCS_PATH=src/content/docs
+CLARITY_DOCS_PATH=src/content/docs
 ```
 
 **💡 Important Notes:**
@@ -124,7 +124,7 @@ Visit **http://localhost:4321** in your browser. You should see Clarity running 
 **✨ What to check:**
 - Header shows your `PUBLIC_SITE_NAME`
 - Logo loads correctly
-- "Edit on GitHub" links point to your `PUBLIC_GITHUB_REPO`
+- "Edit on GitHub" links point to your `CLARITY_GITHUB_REPO`
 - All navigation works
 
 ### Step 4: Customize Content
@@ -208,7 +208,7 @@ Edit your `.env` file:
 ```env
 PUBLIC_SITE_URL=https://yourusername.github.io/your-repo-name
 PUBLIC_BASE_PATH=/your-repo-name/
-PUBLIC_GITHUB_REPO=yourusername/your-repo-name
+CLARITY_GITHUB_REPO=yourusername/your-repo-name
 ```
 
 **⚠️ Important:** The `PUBLIC_BASE_PATH` must match your repository name!
@@ -240,9 +240,9 @@ Click **"New repository variable"** and add each one:
 | `PUBLIC_SITE_DESCRIPTION` | Your site description |
 | `PUBLIC_SITE_URL` | `https://yourusername.github.io/your-repo-name` |
 | `PUBLIC_BASE_PATH` | `/your-repo-name/` |
-| `PUBLIC_GITHUB_REPO` | `yourusername/your-repo-name` |
-| `PUBLIC_GITHUB_BRANCH` | `main` |
-| `PUBLIC_GITHUB_DOCS_PATH` | `src/content/docs` |
+| `CLARITY_GITHUB_REPO` | `yourusername/your-repo-name` |
+| `CLARITY_GITHUB_BRANCH` | `main` |
+| `CLARITY_DOCS_PATH` | `src/content/docs` |
 | `PUBLIC_BACKEND_URL` | (Optional) Only if using auth features |
 
 **💡 Note:** You don't need to set `GITHUB_TOKEN` - it's automatically provided by GitHub Actions.
@@ -276,7 +276,7 @@ Edit your `.env` file:
 ```env
 PUBLIC_SITE_URL=https://docs.mycompany.com
 PUBLIC_BASE_PATH=/
-PUBLIC_GITHUB_REPO=yourusername/your-repo-name
+CLARITY_GITHUB_REPO=yourusername/your-repo-name
 ```
 
 **💡 For custom domains:** Use your actual domain. For Vercel's auto domain, use `https://your-project.vercel.app`
@@ -318,9 +318,9 @@ During setup:
 | `PUBLIC_SITE_DESCRIPTION` | Your description | Production, Preview, Development |
 | `PUBLIC_SITE_URL` | `https://docs.mycompany.com` | Production, Preview, Development |
 | `PUBLIC_BASE_PATH` | `/` | Production, Preview, Development |
-| `PUBLIC_GITHUB_REPO` | `yourusername/your-repo-name` | Production, Preview, Development |
-| `PUBLIC_GITHUB_BRANCH` | `main` | Production, Preview, Development |
-| `PUBLIC_GITHUB_DOCS_PATH` | `src/content/docs` | Production, Preview, Development |
+| `CLARITY_GITHUB_REPO` | `yourusername/your-repo-name` | Production, Preview, Development |
+| `CLARITY_GITHUB_BRANCH` | `main` | Production, Preview, Development |
+| `CLARITY_DOCS_PATH` | `src/content/docs` | Production, Preview, Development |
 
 **Important:** Select all three environments (Production, Preview, Development) for each variable!
 
@@ -355,7 +355,7 @@ Edit your `.env` file:
 ```env
 PUBLIC_SITE_URL=https://docs.mycompany.com
 PUBLIC_BASE_PATH=/
-PUBLIC_GITHUB_REPO=yourusername/your-repo-name
+CLARITY_GITHUB_REPO=yourusername/your-repo-name
 ```
 
 #### 2. Create netlify.toml
@@ -422,9 +422,9 @@ netlify deploy --prod
 | `PUBLIC_SITE_DESCRIPTION` | Your description |
 | `PUBLIC_SITE_URL` | `https://docs.mycompany.com` |
 | `PUBLIC_BASE_PATH` | `/` |
-| `PUBLIC_GITHUB_REPO` | `yourusername/your-repo-name` |
-| `PUBLIC_GITHUB_BRANCH` | `main` |
-| `PUBLIC_GITHUB_DOCS_PATH` | `src/content/docs` |
+| `CLARITY_GITHUB_REPO` | `yourusername/your-repo-name` |
+| `CLARITY_GITHUB_BRANCH` | `main` |
+| `CLARITY_DOCS_PATH` | `src/content/docs` |
 
 #### 5. Trigger Redeploy
 
@@ -537,7 +537,7 @@ PUBLIC_SITE_NAME=MyCompany Docs
 PUBLIC_SITE_DESCRIPTION=Internal documentation and guides
 PUBLIC_SITE_URL=https://docs.mycompany.com
 PUBLIC_BASE_PATH=/
-PUBLIC_GITHUB_REPO=mycompany/internal-docs
+CLARITY_GITHUB_REPO=mycompany/internal-docs
 ```
 
 **Recommended Platform:** Vercel or Netlify with access control
@@ -558,7 +558,7 @@ PUBLIC_SITE_NAME=YourProject
 PUBLIC_SITE_DESCRIPTION=Documentation for YourProject
 PUBLIC_SITE_URL=https://yourproject.github.io
 PUBLIC_BASE_PATH=/
-PUBLIC_GITHUB_REPO=yourusername/yourproject
+CLARITY_GITHUB_REPO=yourusername/yourproject
 ```
 
 **Recommended Platform:** GitHub Pages (free!)
@@ -577,7 +577,7 @@ PUBLIC_GITHUB_REPO=yourusername/yourproject
 PUBLIC_SITE_NAME=ProjectName Docs
 PUBLIC_SITE_URL=https://docs.company.com
 PUBLIC_BASE_PATH=/project-name/
-PUBLIC_GITHUB_REPO=company/project-name
+CLARITY_GITHUB_REPO=company/project-name
 ```
 
 **Recommended Platform:** Vercel with path routing
@@ -799,9 +799,9 @@ git checkout src/styles/global.css
 **Solutions:**
 ```bash
 # 1. Check GitHub configuration in .env
-PUBLIC_GITHUB_REPO=yourusername/your-repo  # ← must be correct!
-PUBLIC_GITHUB_BRANCH=main  # ← your default branch
-PUBLIC_GITHUB_DOCS_PATH=src/content/docs  # ← path to docs
+CLARITY_GITHUB_REPO=yourusername/your-repo  # ← must be correct!
+CLARITY_GITHUB_BRANCH=main  # ← your default branch
+CLARITY_DOCS_PATH=src/content/docs  # ← path to docs
 
 # 2. Verify in deployment platform
 # Variables must be set there too!
@@ -844,14 +844,14 @@ Here's a complete reference of all environment variables:
 
 | Variable | Description | Example | Required |
 |----------|-------------|---------|----------|
-| `PUBLIC_GITHUB_REPO` | GitHub repository in format owner/repo-name (used for "Edit on GitHub" links) | `myusername/my-repo` | ✅ Yes |
-| `PUBLIC_GITHUB_BRANCH` | Default branch name (used in edit links) | `main` or `master` | ✅ Yes |
-| `PUBLIC_GITHUB_DOCS_PATH` | Path to docs folder within repo (where markdown files are) | `src/content/docs` | ✅ Yes |
+| `CLARITY_GITHUB_REPO` | GitHub repository in format owner/repo-name (used for "Edit on GitHub" links) | `myusername/my-repo` | ✅ Yes |
+| `CLARITY_GITHUB_BRANCH` | Default branch name (used in edit links) | `main` or `master` | ✅ Yes |
+| `CLARITY_DOCS_PATH` | Path to docs folder within repo (where markdown files are) | `src/content/docs` | ✅ Yes |
 
 **💡 Notes:**
-- `PUBLIC_GITHUB_REPO` enables "Edit on GitHub" button on doc pages
-- `PUBLIC_GITHUB_BRANCH` should be your main/default branch
-- `PUBLIC_GITHUB_DOCS_PATH` is relative to repo root
+- `CLARITY_GITHUB_REPO` enables "Edit on GitHub" button on doc pages
+- `CLARITY_GITHUB_BRANCH` should be your main/default branch
+- `CLARITY_DOCS_PATH` is relative to repo root
 
 ### Where These Variables Are Used
 

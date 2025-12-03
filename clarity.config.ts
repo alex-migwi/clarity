@@ -45,7 +45,7 @@ export const clarityConfig = {
     copyright: `© ${new Date().getFullYear()} ${process.env.PUBLIC_SITE_NAME || "Clarity"}. All rights reserved.`,
     links: [
       { text: "Documentation", href: process.env.PUBLIC_SITE_URL || "https://alex-migwi.github.io/clarity-docs" },
-      { text: "GitHub", href: `https://github.com/${process.env.PUBLIC_GITHUB_REPO || "alex-migwi/clarity"}` },
+      { text: "GitHub", href: `https://github.com/${process.env.CLARITY_GITHUB_REPO || "alex-migwi/clarity"}` },
       { text: "Privacy Policy", href: "/privacy" },
       { text: "Terms of Service", href: "/terms" },
     ],

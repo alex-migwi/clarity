@@ -58,7 +58,7 @@ Edit `.env` with your site information:
 
 ```bash
 PUBLIC_SITE_URL=http://localhost:4321
-PUBLIC_GITHUB_REPO=your-username/your-repo
+CLARITY_GITHUB_REPO=your-username/your-repo
 ```
 
 For now, you can skip the OAuth configuration in `backend/.env` if you're just exploring.

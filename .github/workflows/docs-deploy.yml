@@ -35,9 +35,9 @@ jobs:
           PUBLIC_SITE_DESCRIPTION: ${{ vars.PUBLIC_SITE_DESCRIPTION || 'A premium documentation platform for teams' }}
           PUBLIC_SITE_URL: ${{ vars.PUBLIC_SITE_URL || 'https://alex-migwi.github.io/clarity-docs' }}
           PUBLIC_BASE_PATH: ${{ vars.PUBLIC_BASE_PATH || '/clarity-docs/' }}
-          PUBLIC_GITHUB_REPO: ${{ vars.PUBLIC_GITHUB_REPO || 'alex-migwi/clarity' }}
-          PUBLIC_GITHUB_BRANCH: ${{ vars.PUBLIC_GITHUB_BRANCH || 'main' }}
-          PUBLIC_GITHUB_DOCS_PATH: ${{ vars.PUBLIC_GITHUB_DOCS_PATH || 'src/content/docs' }}
+          CLARITY_GITHUB_REPO: ${{ vars.CLARITY_GITHUB_REPO || 'alex-migwi/clarity' }}
+          CLARITY_GITHUB_BRANCH: ${{ vars.CLARITY_GITHUB_BRANCH || 'main' }}
+          CLARITY_DOCS_PATH: ${{ vars.CLARITY_DOCS_PATH || 'src/content/docs' }}
           PUBLIC_BACKEND_URL: ${{ vars.PUBLIC_BACKEND_URL || '' }}
 
       - name: Deploy to alex-migwi.github.io/clarity-docs
