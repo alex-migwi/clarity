@@ -23,6 +23,10 @@ importers:
       tailwindcss:
         specifier: ^4.1.12
         version: 4.1.12
+    devDependencies:
+      kleur:
+        specifier: ^4.1.5
+        version: 4.1.5
 
 packages:
 
