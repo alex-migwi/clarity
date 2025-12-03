@@ -93,13 +93,15 @@
 
   /* Code Blocks */
   pre {
-    @apply p-4 rounded-lg overflow-x-auto my-6 border border-border;
+    @apply p-4 rounded-lg overflow-x-auto my-6;
+    border: 1px solid hsl(var(--border));
     background-color: hsl(var(--muted) / 0.5);
   }
 
   code {
-    @apply font-mono text-sm px-1.5 py-0.5 rounded text-foreground;
+    @apply font-mono text-sm px-1.5 py-0.5 rounded;
     background-color: hsl(var(--muted) / 0.5);
+    color: hsl(var(--foreground));
   }
 
   pre code {
@@ -112,7 +114,8 @@
   }
 
   .prose h2 {
-    @apply scroll-m-20 border-b border-border pb-2 text-3xl font-bold tracking-tight first:mt-0 mt-12 mb-6;
+    @apply scroll-m-20 pb-2 text-3xl font-bold tracking-tight first:mt-0 mt-12 mb-6;
+    border-bottom: 1px solid hsl(var(--border));
   }
 
   .prose h3 {
@@ -128,7 +131,8 @@
   }
 
   .prose h6 {
-    @apply scroll-m-20 text-base font-medium tracking-tight mt-6 mb-2 text-muted-foreground;
+    @apply scroll-m-20 text-base font-medium tracking-tight mt-6 mb-2;
+    color: hsl(var(--muted-foreground));
   }
 
   .prose p {
@@ -136,7 +140,9 @@
   }
 
   .prose blockquote {
-    @apply mt-6 border-l-2 border-primary pl-6 italic text-muted-foreground;
+    @apply mt-6 pl-6 italic;
+    border-left: 2px solid hsl(var(--primary));
+    color: hsl(var(--muted-foreground));
   }
 
   .prose ul {
@@ -148,7 +154,8 @@
   }
 
   .prose a {
-    @apply font-medium text-primary underline underline-offset-4 transition-colors;
+    @apply font-medium underline underline-offset-4 transition-colors;
+    color: hsl(var(--primary));
   }
 
   .prose a:hover {
@@ -160,10 +167,13 @@
   }
 
   .prose th {
-    @apply border border-border px-4 py-2 text-left font-bold bg-muted;
+    @apply px-4 py-2 text-left font-bold;
+    border: 1px solid hsl(var(--border));
+    background-color: hsl(var(--muted));
   }
 
   .prose td {
-    @apply border border-border px-4 py-2;
+    @apply px-4 py-2;
+    border: 1px solid hsl(var(--border));
   }
 }
