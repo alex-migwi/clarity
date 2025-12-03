@@ -1,14 +1,16 @@
 {
-  "name": "astrodocs",
+  "name": "clarity",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "prebuild": "astro run ./scripts/generate-search-index.mjs",
+    "prebuild": "node ./scripts/generate-search-index.mjs",
     "build": "astro build",
     "preview": "astro preview",
     "start": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "backend": "cd backend && node server.js",
+    "backend:dev": "cd backend && node server.js"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.12",
