@@ -6,10 +6,10 @@
 export const clarityConfig = {
   // Site metadata
   site: {
-    name: "Clarity",
-    description: "A premium documentation platform for teams",
+    name: process.env.PUBLIC_SITE_NAME || "Clarity",
+    description: process.env.PUBLIC_SITE_DESCRIPTION || "A premium documentation platform for teams",
     url: process.env.PUBLIC_SITE_URL || "https://alex-migwi.github.io/clarity-docs",
-    logo: "/logo.svg", // Path to your logo
+    logo: process.env.PUBLIC_SITE_URL ? `${process.env.PUBLIC_SITE_URL}/logo.svg` : "/clarity-docs/logo.svg",
   },
 
   // Navigation
@@ -23,9 +23,9 @@ export const clarityConfig = {
   // GitHub integration
   github: {
     enabled: true,
-    repo: process.env.PUBLIC_GITHUB_REPO || "alex-migwi/clarity", // GitHub repository
-    branch: "main",
-    docsPath: "src/content/docs", // Path to docs in your repo
+    repo: process.env.PUBLIC_GITHUB_REPO || "alex-migwi/clarity",
+    branch: process.env.PUBLIC_GITHUB_BRANCH || "main",
+    docsPath: process.env.PUBLIC_GITHUB_DOCS_PATH || "src/content/docs",
     editLinkText: "Edit this page on GitHub",
   },
 

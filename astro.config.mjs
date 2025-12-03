@@ -5,8 +5,8 @@ import rehypeMermaid from 'rehype-mermaid';
 
 // https://astro.build/config
 export default defineConfig({
-  site: process.env.PUBLIC_SITE_URL || 'https://alex-migwi.github.io',
-  base: '/clarity-docs/',
+  site: process.env.PUBLIC_SITE_URL || 'https://alex-migwi.github.io/clarity-docs',
+  base: process.env.PUBLIC_BASE_PATH || '/clarity-docs/',
   integrations: [],
   markdown: {
     syntaxHighlight: {
