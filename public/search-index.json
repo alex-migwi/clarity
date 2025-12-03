@@ -1,18 +1,28 @@
 [
   {
+    "slug": "authentication-setup",
+    "title": "Authentication Setup",
+    "content": "# Authentication Setup Guide\r\n\r\nClarity includes built-in authentication using OAuth 2.0 with Google and GitHub. This guide walks you through setting up authentication for your documentation site.\r\n\r\n## Overview\r\n\r\nThe authentication system consists of:\r\n- **Frontend**: Login page and dashboard built with Astro\r\n- **Backend**: Node.js/Express server handling OAuth flows\r\n- **OAuth Providers**: Google and GitHub for social login\r\n\r\n## Prerequisites\r\n\r\nBefore you begin, you'll need:\r\n- A Google Cl"
+  },
+  {
     "slug": "configuration",
     "title": "Configuration Guide",
     "content": "# Configuration Guide\r\n\r\nClarity is designed to be easily customizable through a single configuration file: `clarity.config.ts`. This guide will walk you through all available options.\r\n\r\n## Configuration File Location\r\n\r\nThe configuration file is located at the root of your project:\r\n\r\n```\r\nclarity.config.ts\r\n```\r\n\r\n## Site Configuration\r\n\r\n### Basic Settings\r\n\r\n```typescript\r\nsite: {\r\n  name: \"Clarity\",\r\n  description: \"A premium documentation platform for teams\",\r\n  url: \"https://clarity.exam"
   },
   {
+    "slug": "deployment",
+    "title": "Production Deployment",
+    "content": "# Production Deployment Guide\r\n\r\nThis guide walks you through deploying Clarity to production with full authentication support.\r\n\r\n## Prerequisites\r\n\r\nBefore deploying, ensure you have:\r\n\r\n- A production domain or hosting platform account\r\n- Google Cloud Console account (for Google OAuth)\r\n- GitHub account (for GitHub OAuth)\r\n- Node.js hosting for the backend (Heroku, Railway, DigitalOcean, etc.)\r\n- Static hosting for the frontend (Vercel, Netlify, GitHub Pages, etc.)\r\n\r\n## Step 1: Environment S"
+  },
+  {
     "slug": "getting-started",
     "title": "getting-started",
-    "content": "This is the getting started page. Here you can explain how to set up and use the project.\n\n### Installation\n\n```bash\npnpm create astro-docs@latest\n```\n"
+    "content": "# Getting Started with Clarity\n\nThis guide will help you set up Clarity locally and start creating documentation.\n\n## Prerequisites\n\nBefore you begin, ensure you have:\n\n- **Node.js 18+** installed on your system\n- **pnpm** package manager (`npm install -g pnpm`)\n- A code editor (VS Code recommended)\n- Git for version control\n\n## Installation\n\n### 1. Clone the Repository\n\n```bash\ngit clone https://github.com/alex-migwi/clarity.git\ncd clarity\n```\n\n### 2. Install Dependencies\n\nInstall both frontend"
   },
   {
     "slug": "introduction",
     "title": "introduction",
-    "content": "This is the introduction page. You can write your content here using Markdown.\n"
+    "content": "# Welcome to Clarity\n\nClarity is a modern, feature-rich documentation platform built with Astro 5. It's designed to help teams create beautiful, searchable, and maintainable documentation with minimal setup.\n\n## Why Clarity?\n\n**Built for Teams**: Clarity provides authentication, role management, and collaboration features out of the box.\n\n**Developer-Friendly**: Write documentation in Markdown, with full TypeScript support and hot reload during development.\n\n**Production-Ready**: Includes OAuth "
   },
   {
     "slug": "quick-start",
@@ -21,8 +31,8 @@
   },
   {
     "slug": "sample-guide",
-    "title": "Getting Started with Clarity",
-    "content": "# Introduction\r\n\r\nWelcome to **Clarity**! This is a sample document designed to demonstrate the capabilities of our modern documentation platform.\r\n\r\n## Features Overview\r\n\r\nWe've packed a lot of great features into this release:\r\n\r\n- **Premium UI:** A clean, modern interface built with Tailwind CSS and a Zinc color palette.\r\n- **Dark Mode:** Fully supported dark mode that respects your system preferences.\r\n- **Responsive Design:** A mobile-friendly layout with a collapsible sidebar.\r\n- **Table "
+    "title": "Writing Documentation",
+    "content": "# Writing Documentation with Clarity\r\n\r\nThis guide covers best practices for writing documentation and using Clarity's markdown features effectively.\r\n\r\n## Document Structure\r\n\r\n### Frontmatter\r\n\r\nEvery documentation file should start with frontmatter:\r\n\r\n```markdown\r\n---\r\ntitle: Your Page Title\r\ndescription: A brief description for SEO\r\norder: 10\r\ndraft: false\r\n---\r\n```\r\n\r\n**Fields:**\r\n- `title`: Page title (required)\r\n- `description`: SEO meta description (required)\r\n- `order`: Sidebar orderin"
   },
   {
     "slug": "using-components",
