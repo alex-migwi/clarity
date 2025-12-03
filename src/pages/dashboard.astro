@@ -2,7 +2,7 @@
 // src/pages/dashboard.astro
 import Layout from '../layouts/DocLayout.astro';
 
-const backendUrl = 'http://localhost:3000';
+const backendUrl = import.meta.env.PUBLIC_BACKEND_URL || 'http://localhost:3000';
 
 let user = null;
 try {

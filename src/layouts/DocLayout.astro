@@ -51,23 +51,28 @@ const breadcrumbItems = pathParts.map((part, index) => {
         <!-- Canonical URL -->
         <link rel="canonical" href={Astro.url} />
         
-        <title>{pageTitle} - Clarity</title>
+        <title>{pageTitle} - {clarityConfig.site.name}</title>
         <script is:inline>
-            const getThemePreference = () => {
-                if (
-                    typeof localStorage !== "undefined" &&
-                    localStorage.getItem("theme")
-                ) {
-                    return localStorage.getItem("theme");
+            // Theme initialization - must run before page renders
+            (function() {
+                const getThemePreference = () => {
+                    if (
+                        typeof localStorage !== "undefined" &&
+                        localStorage.getItem("theme")
+                    ) {
+                        return localStorage.getItem("theme");
+                    }
+                    return window.matchMedia("(prefers-color-scheme: dark)").matches
+                        ? "dark"
+                        : "light";
+                };
+                const theme = getThemePreference();
+                if (theme === "dark") {
+                    document.documentElement.classList.add("dark");
+                } else {
+                    document.documentElement.classList.remove("dark");
                 }
-                return window.matchMedia("(prefers-color-scheme: dark)").matches
-                    ? "dark"
-                    : "light";
-            };
-            const isDark = getThemePreference() === "dark";
-            document.documentElement.classList[isDark ? "add" : "remove"](
-                "dark",
-            );
+            })();
 
             if (typeof localStorage !== "undefined") {
                 const observer = new MutationObserver(() => {
