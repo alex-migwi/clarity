@@ -8,18 +8,19 @@ interface Props {
 }
 
 const { node } = Astro.props;
+const base = import.meta.env.BASE_URL || '/';
 const currentPath = Astro.url.pathname;
 const isActive =
     node.slug &&
-    (currentPath === `/docs/${node.slug}` ||
-        currentPath === `/docs/${node.slug}/`);
+    (currentPath === `${base}docs/${node.slug}` ||
+        currentPath === `${base}docs/${node.slug}/`);
 ---
 
 <li class="mt-1">
     {
         node.slug ? (
             <a
-                href={`/docs/${node.slug}`}
+                href={`${base}docs/${node.slug}`}
                 class:list={[
                     "block py-2 px-3 text-sm rounded-md transition-colors duration-200",
                     isActive
