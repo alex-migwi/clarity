@@ -398,6 +398,77 @@ Use this checklist to ensure everything is ready:
 - [ ] Verified sitemap generation
 - [ ] Set up custom domain (if needed)
 
+## Production Deployment Checklist
+
+Use this checklist to ensure you've completed all necessary steps before going live:
+
+### Pre-Deployment
+
+- [ ] Copy `.env.example` to `.env` and fill in all values
+- [ ] Copy `backend/.env.example` to `backend/.env` and add OAuth credentials
+- [ ] Update `PUBLIC_SITE_URL` to your production domain
+- [ ] Update `PUBLIC_GITHUB_REPO` if using GitHub edit links
+- [ ] Set up Google OAuth application with production callback URLs
+- [ ] Set up GitHub OAuth application with production callback URLs
+- [ ] Add OAuth redirect URIs for your production domains
+- [ ] Review and update content in `src/content/docs/`
+- [ ] Replace logo at `public/logo.svg` with your branding
+- [ ] Customize `clarity.config.ts` with your settings
+- [ ] Test build locally: `pnpm build`
+- [ ] Test preview locally: `pnpm preview`
+
+### Backend Deployment
+
+- [ ] Install backend dependencies: `cd backend && npm install`
+- [ ] Test backend locally: `pnpm backend:dev`
+- [ ] Test login flow locally (Google and GitHub)
+- [ ] Deploy backend to hosting platform
+- [ ] Update `FRONTEND_URL` in backend production environment
+- [ ] Verify backend health endpoint responds
+- [ ] Test OAuth callbacks with production URLs
+
+### Frontend Deployment
+
+- [ ] Run production build: `pnpm build`
+- [ ] Verify search index generated in `public/search-index.json`
+- [ ] Check all pages built successfully
+- [ ] Deploy frontend to hosting platform
+- [ ] Configure custom domain (if applicable)
+- [ ] Set up SSL/TLS certificate
+
+### Post-Deployment Testing
+
+- [ ] Test site loads on production URL
+- [ ] Test login with Google OAuth
+- [ ] Test login with GitHub OAuth
+- [ ] Test logout functionality
+- [ ] Verify search works correctly
+- [ ] Check sitemap: `https://your-domain.com/sitemap.xml`
+- [ ] Test navigation (sidebar, breadcrumbs, prev/next)
+- [ ] Test on mobile devices
+- [ ] Test dark/light theme toggle
+- [ ] Verify all links work correctly
+- [ ] Check for console errors in browser
+
+### Monitoring & Optimization
+
+- [ ] Set up error tracking (Sentry, LogRocket, etc.)
+- [ ] Configure analytics (Google Analytics, Plausible, etc.)
+- [ ] Enable CDN for static assets
+- [ ] Set up uptime monitoring
+- [ ] Configure automated backups
+- [ ] Review and optimize Core Web Vitals
+- [ ] Add robots.txt and sitemap to search engines
+
+### Security
+
+- [ ] Review CORS settings in backend
+- [ ] Implement rate limiting on API endpoints
+- [ ] Ensure all environment variables are secure
+- [ ] Enable security headers (CSP, HSTS, etc.)
+- [ ] Set up DDoS protection
+- [ ] Configure WAF rules (if applicable)
+
 ## Next Steps
 
 After successful deployment:

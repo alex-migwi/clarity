@@ -1,28 +1,64 @@
 ---
 title: "Writing Documentation"
-description: "A comprehensive guide to using Clarity's features, including the Table of Contents, code highlighting, and responsive design."
-order: 30
+description: "A comprehensive guide to writing great documentation with Clarity's features."
+order: 40
 draft: false
 image: ""
 ---
 
-# Introduction
+# Writing Documentation with Clarity
 
-Welcome to **Clarity**! This is a sample document designed to demonstrate the capabilities of our modern documentation platform.
+This guide covers best practices for writing documentation and using Clarity's markdown features effectively.
 
-## Features Overview
+## Document Structure
 
-We've packed a lot of great features into this release:
+### Frontmatter
 
-- **Premium UI:** A clean, modern interface built with Tailwind CSS and a Zinc color palette.
-- **Dark Mode:** Fully supported dark mode that respects your system preferences.
-- **Responsive Design:** A mobile-friendly layout with a collapsible sidebar.
-- **Table of Contents:** Automatically generated right-side navigation for easy reading.
+Every documentation file should start with frontmatter:
 
-## Code Highlighting
+```markdown
+---
+title: Your Page Title
+description: A brief description for SEO
+order: 10
+draft: false
+---
+```
 
-Clarity supports syntax highlighting for code blocks. Here's an example in JavaScript:
+**Fields:**
+- `title`: Page title (required)
+- `description`: SEO meta description (required)
+- `order`: Sidebar ordering (lower numbers appear first)
+- `draft`: Set to `true` to hide in production
+- `lastUpdated`: Automatically tracked (optional)
+- `contributors`: Array of contributor names (optional)
 
+## Markdown Basics
+
+```javascript
+function greet(name) {
+  console.log(`Hello, ${name}!`);
+}
+
+### Text Formatting
+
+- **Bold text** for emphasis
+- *Italic text* for subtle highlights
+- ***Bold and italic*** for strong emphasis
+- ~~Strikethrough~~ for deprecated content
+- `Inline code` for technical terms and commands
+
+### Links
+
+- [External link](https://astro.build)
+- [Internal link](./configuration)
+- [Link with title](https://github.com "GitHub")
+
+### Code Blocks
+
+Clarity supports syntax highlighting for multiple languages:
+
+**JavaScript:**
 ```javascript
 function greet(name) {
   console.log(`Hello, ${name}!`);
@@ -31,8 +67,20 @@ function greet(name) {
 greet('Developer');
 ```
 
-And here's some CSS:
+**TypeScript:**
+```typescript
+interface Config {
+  name: string;
+  version: number;
+}
 
+const config: Config = {
+  name: 'Clarity',
+  version: 1
+};
+```
+
+**CSS:**
 ```css
 .hero {
   background: linear-gradient(to right, #4f46e5, #06b6d4);
@@ -41,50 +89,143 @@ And here's some CSS:
 }
 ```
 
-## Typography and Formatting
-
-We use the **Inter** font family for optimal readability. You can use standard Markdown formatting:
-
-- **Bold text** for emphasis.
-- *Italic text* for subtle highlights.
-- [Links](https://astro.build) to external resources.
-- `Inline code` for technical terms.
+**Bash:**
+```bash
+pnpm install
+pnpm dev
+```
 
 ### Blockquotes
 
 > "Documentation is a love letter that you write to your future self."
 > — *Damian Conway*
 
+Use blockquotes for important notes or quotes.
+
 ### Lists
 
-#### Unordered List
-*   Item 1
-*   Item 2
-    *   Sub-item A
-    *   Sub-item B
-*   Item 3
+**Unordered:**
+- Item 1
+- Item 2
+  - Sub-item A
+  - Sub-item B
+- Item 3
 
-#### Ordered List
-1.  Step One
-2.  Step Two
-3.  Step Three
+**Ordered:**
+1. First step
+2. Second step
+3. Third step
 
-## Advanced Sections
+**Task Lists:**
+- [x] Completed task
+- [ ] Pending task
+- [ ] Another pending task
 
-### Tables
+## Tables
+
+Create tables for structured information:
 
 | Feature | Status | Description |
-| :--- | :--- | :--- |
-| Dark Mode | ✅ Ready | Toggles seamlessly |
-| Mobile View | ✅ Ready | Hamburger menu included |
-| Search | 🚧 Beta | Basic functionality |
+|---------|--------|-------------|
+| Dark Mode | ✅ Ready | System preference detection |
+| Search | ✅ Ready | Full-text with keyboard shortcuts |
+| Auth | ✅ Ready | Google & GitHub OAuth |
+| Responsive | ✅ Ready | Mobile-friendly design |
 
-### Images
+## Advanced Features
 
-You can easily embed images. (Note: This is a placeholder text as we don't have an image file handy, but standard markdown image syntax works!)
+### Callouts
 
-## Conclusion
+Use callouts (via components) for special notices:
 
-This document serves as a test bed for the **Table of Contents** component on the right. As you scroll through these sections, you should see the active heading update.
+```markdown
+:::note
+This is an informational callout.
+:::
+
+:::warning
+This is a warning callout.
+:::
+
+:::danger
+This is a danger callout.
+:::
+```
+
+### Tabs
+
+Create tabbed content for multiple options:
+
+```markdown
+:::tabs
+== Tab 1
+Content for tab 1
+
+== Tab 2
+Content for tab 2
+:::
+```
+
+### Mermaid Diagrams
+
+Clarity supports Mermaid for diagrams:
+
+````markdown
+```mermaid
+graph TD
+    A[Start] --> B[Process]
+    B --> C[End]
+```
+````
+
+## Best Practices
+
+### Writing Tips
+
+1. **Be Concise**: Get to the point quickly
+2. **Use Examples**: Code examples help understanding
+3. **Add Context**: Explain why, not just how
+4. **Stay Current**: Update docs with code changes
+5. **Use Headings**: Break content into scannable sections
+
+### SEO Optimization
+
+- Write descriptive titles and descriptions
+- Use proper heading hierarchy (H1 → H2 → H3)
+- Include relevant keywords naturally
+- Add alt text for images
+- Link to related documentation
+
+### Accessibility
+
+- Use semantic headings
+- Provide text alternatives for visual content
+- Write descriptive link text (avoid "click here")
+- Maintain good color contrast
+- Keep paragraphs short and readable
+
+## Navigation Features
+
+### Table of Contents
+
+The right sidebar automatically generates a table of contents from your headings. It:
+- Updates as you scroll
+- Highlights the current section
+- Provides quick navigation
+
+### Breadcrumbs
+
+Breadcrumbs appear at the top of each page showing the document path.
+
+### Previous/Next
+
+Navigation links appear at the bottom to move between documents in order.
+
+## Next Steps
+
+- Learn about [Configuration](./configuration)
+- Explore [Using Components](./using-components)
+- Set up [Authentication](./authentication-setup)
+- Deploy with the [Deployment Guide](./deployment)
 
 Happy documenting!
