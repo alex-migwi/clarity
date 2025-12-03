@@ -4,17 +4,54 @@ import Header from "../components/Header.astro";
 import Sidebar from "../components/Sidebar.astro";
 import Footer from "../components/Footer.astro";
 import TableOfContents from "../components/TableOfContents.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import EditLink from "../components/EditLink.astro";
+import PrevNext from "../components/PrevNext.astro";
+import CopyCode from "../components/CopyCode.astro";
+import DocMeta from "../components/DocMeta.astro";
+import Feedback from "../components/Feedback.astro";
+import { clarityConfig } from "../../clarity.config";
 
 const { frontmatter, headings, title, description } = Astro.props;
-const pageTitle = title || frontmatter?.title || "AstroDocs";
+const pageTitle = title || frontmatter?.title || "Clarity";
 const pageDescription = description || frontmatter?.description || "";
+
+// Get slug from URL for edit link
+const slug = Astro.url.pathname.replace('/docs/', '').replace(/\/$/, '');
+
+// Build breadcrumbs from slug
+const pathParts = slug.split('/').filter(Boolean);
+const breadcrumbItems = pathParts.map((part, index) => {
+  const href = '/docs/' + pathParts.slice(0, index + 1).join('/');
+  const text = part.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+  return { text, href };
+});
 ---
 
 <html lang="en" class="scroll-smooth">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width" />
-        <title>{pageTitle} - AstroDocs</title>
+        <meta name="description" content={pageDescription} />
+        <meta name="author" content={clarityConfig.site.name} />
+        
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={Astro.url} />
+        <meta property="og:title" content={`${pageTitle} - ${clarityConfig.site.name}`} />
+        <meta property="og:description" content={pageDescription} />
+        <meta property="og:site_name" content={clarityConfig.site.name} />
+        
+        <!-- Twitter -->
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:url" content={Astro.url} />
+        <meta name="twitter:title" content={`${pageTitle} - ${clarityConfig.site.name}`} />
+        <meta name="twitter:description" content={pageDescription} />
+        
+        <!-- Canonical URL -->
+        <link rel="canonical" href={Astro.url} />
+        
+        <title>{pageTitle} - Clarity</title>
         <script is:inline>
             const getThemePreference = () => {
                 if (
@@ -68,19 +105,35 @@ const pageDescription = description || frontmatter?.description || "";
                     class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex gap-10"
                 >
                     <article
-                        class="flex-1 prose dark:prose-invert max-w-none prose-headings:scroll-mt-20 prose-a:text-primary hover:prose-a:text-primary/80"
+                        class="flex-1 prose dark:prose-invert max-w-4xl prose-headings:scroll-mt-20 prose-a:text-primary hover:prose-a:text-primary/80"
                     >
-                        <h1 class="text-4xl font-bold tracking-tight mb-4">
-                            {pageTitle}
-                        </h1>
-                        <p class="text-xl text-muted-foreground mb-8">
-                            {pageDescription}
-                        </p>
+                        {clarityConfig.features.showBreadcrumbs && breadcrumbItems.length > 0 && (
+                            <Breadcrumbs items={breadcrumbItems} />
+                        )}
+                        <div class="not-prose mb-10">
+                            <h1 class="text-5xl font-extrabold tracking-tight mb-4 text-foreground">
+                                {pageTitle}
+                            </h1>
+                            {pageDescription && (
+                                <p class="text-xl text-muted-foreground leading-relaxed">
+                                    {pageDescription}
+                                </p>
+                            )}
+                        </div>
                         <slot />
+                        {clarityConfig.features.copyCodeButton && <CopyCode />}
+                        {clarityConfig.features.feedback && <Feedback />}
+                        {(clarityConfig.features.showLastUpdated || clarityConfig.features.showContributors) && (
+                            <DocMeta 
+                                lastUpdated={frontmatter?.lastUpdated}
+                                contributors={frontmatter?.contributors}
+                            />
+                        )}
+                        {clarityConfig.github.enabled && <EditLink slug={slug} />}
                     </article>
 
                     <aside class="hidden xl:block w-64 flex-shrink-0">
-                        <div class="sticky top-24">
+                        <div class="sticky top-24 max-h-[calc(100vh-7rem)] overflow-y-auto">
                             <h2 class="font-semibold mb-4 text-sm">
                                 On this page
                             </h2>
@@ -98,6 +151,7 @@ const pageDescription = description || frontmatter?.description || "";
             const toggleButton = document.getElementById("sidebar-toggle");
 
             function toggleSidebar() {
+                if (!sidebar || !backdrop) return;
                 const isOpen = !sidebar.classList.contains("-translate-x-full");
                 if (isOpen) {
                     sidebar.classList.add("-translate-x-full");

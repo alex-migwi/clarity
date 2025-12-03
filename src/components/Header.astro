@@ -1,6 +1,7 @@
 ---
 import Search from "./Search.astro";
 import ThemeToggle from "./ThemeToggle.astro";
+import { clarityConfig } from "../../clarity.config";
 ---
 
 <header
@@ -28,23 +29,28 @@ import ThemeToggle from "./ThemeToggle.astro";
 
         <div class="flex items-center gap-2 font-bold text-xl tracking-tight">
             <a href="/" class="flex items-center gap-2">
-                <span class="text-primary">AstroDocs</span>
+                <span class="text-primary">{clarityConfig.site.name}</span>
             </a>
         </div>
 
         <div class="flex-1"></div>
 
         <div class="flex items-center gap-4">
-            <div class="hidden md:block w-64">
-                <Search />
-            </div>
+            {clarityConfig.navigation.showSearch && (
+                <div class="hidden md:block w-64">
+                    <Search />
+                </div>
+            )}
             <nav class="flex items-center gap-4">
-                <a
-                    href="/login"
-                    class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-                    >Login</a
-                >
-                <ThemeToggle />
+                {clarityConfig.navigation.showLogin && (
+                    <a
+                        href={clarityConfig.navigation.loginUrl}
+                        class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+                    >
+                        Login
+                    </a>
+                )}
+                {clarityConfig.navigation.showThemeToggle && <ThemeToggle />}
             </nav>
         </div>
     </div>
