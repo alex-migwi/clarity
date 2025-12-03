@@ -224,15 +224,6 @@ theme: {
 
 Create diagrams with code:
 
-\`\`\`mermaid
-graph LR
-    A[Write Docs] --> B[Push to GitHub]
-    B --> C[Auto Deploy]
-    C --> D[Team Reads]
-\`\`\`
-
-Result:
-
 ```mermaid
 graph LR
     A[Write Docs] --> B[Push to GitHub]
@@ -320,4 +311,4 @@ Place images in `public/` folder:
 
 ---
 
-**Your team docs are ready!** ðŸš€
+**Your team docs are readyc:/alex/clarity && tail -1 src/content/docs/*.md* íº€
