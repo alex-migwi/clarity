@@ -16,7 +16,7 @@ export const clarityConfig = {
   navigation: {
     showSearch: true,
     showThemeToggle: true,
-    showLogin: true,
+    showLogin: false, // feature for future use
     loginUrl: "/login",
   },
 
@@ -44,7 +44,7 @@ export const clarityConfig = {
   footer: {
     copyright: `© ${new Date().getFullYear()} Clarity. All rights reserved.`,
     links: [
-      { text: "Documentation", href: "/docs/introduction" },
+      { text: "Documentation", href: "https://alex-migwi.github.io/clarity-docs" },
       { text: "GitHub", href: "https://github.com" },
       { text: "Privacy Policy", href: "/privacy" },
       { text: "Terms of Service", href: "/terms" },
