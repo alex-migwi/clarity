@@ -23,7 +23,7 @@ export const clarityConfig = {
   // GitHub integration
   github: {
     enabled: true,
-    repo: process.env.PUBLIC_GITHUB_REPO || "alex-migwi/clarity", // e.g., "facebook/react"
+    repo: process.env.PUBLIC_GITHUB_REPO || "alex-migwi/clarity", // GitHub repository
     branch: "main",
     docsPath: "src/content/docs", // Path to docs in your repo
     editLinkText: "Edit this page on GitHub",
