@@ -15,8 +15,9 @@
   </button>
 </div>
 
-<!-- Search Modal -->
-<div id="search-modal" class="hidden fixed inset-0 z-[100] overflow-y-auto">
+<!-- Search Modal - Portal to body level -->
+<teleport-search-modal>
+  <div id="search-modal" class="hidden fixed inset-0 z-[9999] overflow-y-auto" style="z-index: 9999 !important;">
   <div class="flex min-h-screen items-start justify-center p-4 pt-20">
     <div class="fixed inset-0 bg-background/80 backdrop-blur-sm" id="search-backdrop"></div>
     
@@ -46,9 +47,19 @@
       </div>
     </div>
   </div>
-</div>
+</teleport-search-modal>
 
 <script>
+  // Move modal to body on mount to escape stacking context
+  const modalContainer = document.querySelector('teleport-search-modal');
+  if (modalContainer) {
+    const modal = modalContainer.querySelector('#search-modal');
+    if (modal) {
+      document.body.appendChild(modal);
+      modalContainer.remove();
+    }
+  }
+
   const modal = document.getElementById('search-modal');
   const trigger = document.getElementById('search-trigger');
   const closeBtn = document.getElementById('search-close');
@@ -80,9 +91,9 @@
 
     const lowerQuery = query.toLowerCase();
     const results = searchData.filter(item => 
-      item.title.toLowerCase().includes(lowerQuery) ||
-      item.description.toLowerCase().includes(lowerQuery) ||
-      item.content.toLowerCase().includes(lowerQuery)
+      (item.title && item.title.toLowerCase().includes(lowerQuery)) ||
+      (item.description && item.description.toLowerCase().includes(lowerQuery)) ||
+      (item.content && item.content.toLowerCase().includes(lowerQuery))
     ).slice(0, 10);
 
     if (results.length === 0) {
@@ -90,16 +101,21 @@
       return;
     }
 
-    // Function to highlight matching text
+    // Function to highlight matching text (case-insensitive)
     function highlightText(text: string, query: string): string {
-      const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+      if (!text || !query) return text || '';
+      // Escape special regex characters and create case-insensitive pattern
+      const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const regex = new RegExp(`(${escapedQuery})`, 'gi');
       return text.replace(regex, '<mark class="bg-primary/20 text-foreground rounded px-0.5">$1</mark>');
     }
 
     // Function to get excerpt with highlighted match
     function getExcerpt(content: string, query: string): string {
+      if (!content) return '';
       const lowerContent = content.toLowerCase();
-      const index = lowerContent.indexOf(query.toLowerCase());
+      const lowerQuery = query.toLowerCase();
+      const index = lowerContent.indexOf(lowerQuery);
       
       if (index === -1) return content.substring(0, 150) + '...';
       
@@ -114,8 +130,8 @@
       <a href="/docs/${result.slug}" 
          class="block px-4 py-3 rounded-md hover:bg-muted/50 transition-colors search-result"
          data-index="${index}">
-        <div class="font-medium text-foreground">${highlightText(result.title, lowerQuery)}</div>
-        <div class="text-sm text-muted-foreground line-clamp-2 mt-1">${getExcerpt(result.description || result.content, lowerQuery)}</div>
+        <div class="font-medium text-foreground">${highlightText(result.title || 'Untitled', lowerQuery)}</div>
+        <div class="text-sm text-muted-foreground line-clamp-2 mt-1">${getExcerpt(result.description || result.content || '', lowerQuery)}</div>
       </a>
     `).join('');
 

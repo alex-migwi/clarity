@@ -1,34 +1,57 @@
 ---
 // src/pages/login.astro
-import Layout from '../layouts/DocLayout.astro'; // Assuming you have a base layout
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
 
 const backendUrl = 'http://localhost:3000'; // Your backend server URL
 ---
 
-<Layout title="Login">
-    <div class="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-        <div class="p-8 bg-white rounded shadow-md w-96">
-            <h1 class="text-2xl font-bold mb-6 text-center">Login</h1>
-
-            <p class="mb-4 text-center">Choose your preferred social login method:</p>
-
-            <div class="space-y-4">
-                <a
-                    href={`${backendUrl}/auth/google`}
-                    class="flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
-                >
-                    <img src="/google-icon.svg" alt="Google" class="h-5 w-5 mr-2" />
-                    Login with Google
-                </a>
-
-                <a
-                    href={`${backendUrl}/auth/github`}
-                    class="flex items-col items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
-                >
-                    <img src="/github-icon.svg" alt="GitHub" class="h-5 w-5 mr-2" />
-                    Login with GitHub
-                </a>
-            </div>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Login - Clarity</title>
+    <script is:inline>
+      const getThemePreference = () => {
+        if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
+          return localStorage.getItem("theme");
+        }
+        return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      };
+      const isDark = getThemePreference() === "dark";
+      document.documentElement.classList[isDark ? "add" : "remove"]("dark");
+    </script>
+  </head>
+  <body class="bg-background text-foreground">
+    <Header />
+    
+    <main class="flex items-center justify-center min-h-[calc(100vh-4rem)] pt-16">
+      <div class="p-8 bg-card border border-border rounded-lg shadow-lg w-96">
+        <h1 class="text-3xl font-bold mb-6 text-center text-foreground">Login</h1>
+        
+        <p class="mb-6 text-center text-muted-foreground">Choose your preferred social login method:</p>
+        
+        <div class="space-y-4">
+          <a
+            href={`${backendUrl}/auth/google`}
+            class="flex items-center justify-center px-4 py-3 border border-border rounded-md shadow-sm text-sm font-medium text-foreground bg-background hover:bg-muted transition-colors"
+          >
+            <img src="/google-icon.svg" alt="Google" class="h-5 w-5 mr-3" />
+            Login with Google
+          </a>
+          
+          <a
+            href={`${backendUrl}/auth/github`}
+            class="flex items-center justify-center px-4 py-3 border border-border rounded-md shadow-sm text-sm font-medium text-foreground bg-background hover:bg-muted transition-colors"
+          >
+            <img src="/github-icon.svg" alt="GitHub" class="h-5 w-5 mr-3" />
+            Login with GitHub
+          </a>
         </div>
-    </div>
-</Layout>
+      </div>
+    </main>
+    
+    <Footer />
+  </body>
+</html>
