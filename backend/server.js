@@ -10,10 +10,11 @@ dotenv.config(); // Load environment variables from .env file
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:4321';
 
 // CORS setup
 app.use(cors({
-    origin: 'http://localhost:4321', // Allow requests from Astro dev server
+    origin: FRONTEND_URL, // Allow requests from Astro frontend
     credentials: true // Allow cookies to be sent
 }));
 
@@ -73,7 +74,7 @@ app.get('/auth/google/callback',
     passport.authenticate('google', { failureRedirect: '/login' }),
     (req, res) => {
         // Successful authentication, redirect home or to a dashboard
-        res.redirect('http://localhost:4321/dashboard'); // Redirect to Astro frontend
+        res.redirect(`${FRONTEND_URL}/dashboard`); // Redirect to Astro frontend
     });
 
 app.get('/auth/github',
@@ -83,7 +84,7 @@ app.get('/auth/github/callback',
     passport.authenticate('github', { failureRedirect: '/login' }),
     (req, res) => {
         // Successful authentication, redirect home or to a dashboard
-        res.redirect('http://localhost:4321/dashboard'); // Redirect to Astro frontend
+        res.redirect(`${FRONTEND_URL}/dashboard`); // Redirect to Astro frontend
     });
 
 // User info endpoint
@@ -99,7 +100,7 @@ app.get('/auth/user', (req, res) => {
 app.get('/auth/logout', (req, res) => {
     req.logout((err) => {
         if (err) { return next(err); }
-        res.redirect('http://localhost:4321/login'); // Redirect to Astro login page
+        res.redirect(`${FRONTEND_URL}/login`); // Redirect to Astro login page
     });
 });
 
