@@ -1,10 +1,19 @@
-# Astro Starter Kit: Basics
+# Clarity
 
-```sh
-pnpm create astro@latest -- --template basics
-```
+A premium documentation platform for teams, built with Astro.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Features
+
+- 🔍 Full-text search with keyboard shortcuts
+- 📝 Active table of contents with scroll highlighting
+- 🎨 Dark/light theme support
+- 💬 Feedback widget on every page
+- 🔗 GitHub integration for edit links
+- 📊 Mermaid diagram support
+- 🎯 SEO optimized with sitemap
+- 🧩 Advanced components (Callouts, Tabs)
+- 🗺️ Breadcrumb navigation
+- ⚡ Lightning-fast performance
 
 ## 🚀 Project Structure
 

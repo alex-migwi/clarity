@@ -105,6 +105,15 @@
     @apply bg-muted-foreground/20 rounded-full hover:bg-muted-foreground/40 transition-colors;
   }
 
+  /* TOC Scrollbar */
+  aside::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  aside::-webkit-scrollbar-thumb {
+    @apply bg-muted-foreground/30 rounded-full hover:bg-muted-foreground/50;
+  }
+
   /* Code Blocks */
   pre {
     @apply p-4 rounded-lg overflow-x-auto my-6 border border-border bg-muted/50;
@@ -118,17 +127,29 @@
     @apply bg-transparent p-0 text-inherit;
   }
 
-  /* Typography Overrides */
+  /* Typography Overrides - Gradual heading progression */
   .prose h1 {
-    @apply scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mb-6;
+    @apply scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mb-6 mt-0;
   }
 
   .prose h2 {
-    @apply scroll-m-20 border-b border-border pb-2 text-3xl font-semibold tracking-tight first:mt-0 mt-10 mb-4;
+    @apply scroll-m-20 border-b border-border pb-2 text-3xl font-bold tracking-tight first:mt-0 mt-12 mb-6;
   }
 
   .prose h3 {
-    @apply scroll-m-20 text-2xl font-semibold tracking-tight mt-8 mb-4;
+    @apply scroll-m-20 text-2xl font-semibold tracking-tight mt-10 mb-4;
+  }
+
+  .prose h4 {
+    @apply scroll-m-20 text-xl font-semibold tracking-tight mt-8 mb-3;
+  }
+
+  .prose h5 {
+    @apply scroll-m-20 text-lg font-medium tracking-tight mt-6 mb-3;
+  }
+
+  .prose h6 {
+    @apply scroll-m-20 text-base font-medium tracking-tight mt-6 mb-2 text-muted-foreground;
   }
 
   .prose p {

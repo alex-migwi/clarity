@@ -7,6 +7,8 @@ const docsCollection = defineCollection({
     order: z.number().optional(),
     draft: z.boolean().optional().default(false),
     image: z.string().optional(),
+    lastUpdated: z.date().optional(),
+    contributors: z.array(z.string()).optional(),
   }),
 });
 
