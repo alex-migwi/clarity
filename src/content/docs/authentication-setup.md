@@ -445,4 +445,3 @@ After setting up authentication:
 
 ---
 
-**Need help?** Check the [Deployment Guide](/docs/deployment) or open an issue on GitHub.

@@ -2,7 +2,7 @@
   {
     "slug": "authentication-setup",
     "title": "Authentication Setup",
-    "content": "# Authentication Setup Guide\r\n\r\nClarity includes built-in authentication using OAuth 2.0 with Google and GitHub. This guide walks you through setting up authentication for your documentation site.\r\n\r\n## Overview\r\n\r\nThe authentication system consists of:\r\n- **Frontend**: Login page and dashboard built with Astro\r\n- **Backend**: Node.js/Express server handling OAuth flows\r\n- **OAuth Providers**: Google and GitHub for social login\r\n\r\n## Prerequisites\r\n\r\nBefore you begin, you'll need:\r\n- A Google Cl"
+    "content": "# Authentication Setup Guide\n\nClarity includes built-in authentication using OAuth 2.0 with Google and GitHub. This guide walks you through setting up authentication for your documentation site.\n\n## Overview\n\nThe authentication system consists of:\n- **Frontend**: Login page and dashboard built with Astro\n- **Backend**: Node.js/Express server handling OAuth flows\n- **OAuth Providers**: Google and GitHub for social login\n\n## Prerequisites\n\nBefore you begin, you'll need:\n- A Google Cloud Console ac"
   },
   {
     "slug": "configuration",
@@ -27,7 +27,7 @@
   {
     "slug": "quick-start",
     "title": "Quick Start for Teams",
-    "content": "# Quick Start for Teams\r\n\r\nGet Clarity configured and deployed for your team in just a few minutes.\r\n\r\n## Step 1: Install Dependencies\r\n\r\n```bash\r\npnpm install\r\n```\r\n\r\n## Step 2: Configure Your Site\r\n\r\nEdit `clarity.config.ts` at the root of your project:\r\n\r\n```typescript\r\nexport const clarityConfig = {\r\n  site: {\r\n    name: \"Your Team Docs\",\r\n    description: \"Documentation for your team\",\r\n    url: \"https://docs.yourcompany.com\",\r\n    logo: \"/logo.svg\",\r\n  },\r\n  \r\n  github: {\r\n    enabled: tru"
+    "content": "# Quick Start for Teams\n\nGet Clarity configured and deployed for your team in just a few minutes.\n\n## Step 1: Install Dependencies\n\n```bash\npnpm install\n```\n\n## Step 2: Configure Your Site\n\nEdit `clarity.config.ts` at the root of your project:\n\n```typescript\nexport const clarityConfig = {\n  site: {\n    name: \"Your Team Docs\",\n    description: \"Documentation for your team\",\n    url: \"https://docs.yourcompany.com\",\n    logo: \"/logo.svg\",\n  },\n  \n  github: {\n    enabled: true,\n    repo: \"yourorg/yo"
   },
   {
     "slug": "sample-guide",
@@ -37,6 +37,6 @@
   {
     "slug": "using-components",
     "title": "Using Components",
-    "content": "# Using Advanced Components\r\n\r\nClarity includes powerful components to make your documentation more engaging and interactive.\r\n\r\n## Callouts\r\n\r\nUse callouts to highlight important information:\r\n\r\n### Info Callout\r\n:::note\r\nThis is an informational callout. Great for general notes and tips.\r\n:::\r\n\r\n### Warning Callout\r\n:::warning\r\nThis is a warning callout. Use it to alert users about potential issues.\r\n:::\r\n\r\n### Danger Callout\r\n:::danger\r\nThis is a danger callout. Use for critical warnings that"
+    "content": "# Using Advanced Components\n\nClarity includes powerful components to make your documentation more engaging and interactive.\n\n## Callouts\n\nUse callouts to highlight important information:\n\n### Info Callout\n:::note\nThis is an informational callout. Great for general notes and tips.\n:::\n\n### Warning Callout\n:::warning\nThis is a warning callout. Use it to alert users about potential issues.\n:::\n\n### Danger Callout\n:::danger\nThis is a danger callout. Use for critical warnings that need immediate atte"
   }
 ]
