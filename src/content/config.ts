@@ -7,7 +7,7 @@ const docsCollection = defineCollection({
     order: z.number().optional(),
     draft: z.boolean().optional().default(false),
     image: z.string().optional(),
-    lastUpdated: z.date().optional(),
+    lastUpdated: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(), // YYYY-MM-DD format
     contributors: z.array(z.string()).optional(),
   }),
 });

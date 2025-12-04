@@ -3,7 +3,7 @@ title: "Authentication Setup"
 description: "Step-by-step guide to setting up OAuth authentication with Google and GitHub"
 order: 35
 draft: false
-lastUpdated: 2025-12-03
+lastUpdated: "2025-12-03"
 contributors: ["Clarity Team"]
 ---
 
