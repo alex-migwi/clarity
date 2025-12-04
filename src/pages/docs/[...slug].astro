@@ -3,7 +3,10 @@ import { getCollection } from "astro:content";
 import DocLayout from "../../layouts/DocLayout.astro";
 import PrevNext from "../../components/PrevNext.astro";
 
+const base = import.meta.env.BASE_URL;
+
 export async function getStaticPaths() {
+  const base = import.meta.env.BASE_URL;
   const docEntries = await getCollection("docs", ({ data }) => {
     return import.meta.env.PROD ? data.draft !== true : true;
   });
@@ -23,8 +26,8 @@ export async function getStaticPaths() {
       params: { slug: entry.slug },
       props: { 
         entry,
-        prev: prev ? { title: prev.data.title, href: `/docs/${prev.slug}` } : undefined,
-        next: next ? { title: next.data.title, href: `/docs/${next.slug}` } : undefined,
+        prev: prev ? { title: prev.data.title, href: `${base}docs/${prev.slug}` } : undefined,
+        next: next ? { title: next.data.title, href: `${base}docs/${next.slug}` } : undefined,
       },
     };
   });
