@@ -16,13 +16,19 @@ const { frontmatter, headings, title, description } = Astro.props;
 const pageTitle = title || frontmatter?.title || "Clarity";
 const pageDescription = description || frontmatter?.description || "";
 
-// Get slug from URL for edit link
-const slug = Astro.url.pathname.replace('/docs/', '').replace(/\/$/, '');
+const base = import.meta.env.BASE_URL;
+
+// Get slug from URL for edit link - handle base path correctly
+const fullPath = Astro.url.pathname;
+const docsPath = `${base}docs/`.replace(/\/+/g, '/'); // Normalize slashes
+const slug = fullPath.includes('/docs/') 
+  ? fullPath.split('/docs/')[1].replace(/\/$/, '')
+  : fullPath.replace(base, '').replace(/^docs\//, '').replace(/\/$/, '');
 
 // Build breadcrumbs from slug
 const pathParts = slug.split('/').filter(Boolean);
 const breadcrumbItems = pathParts.map((part, index) => {
-  const href = '/docs/' + pathParts.slice(0, index + 1).join('/');
+  const href = `${base}docs/${pathParts.slice(0, index + 1).join('/')}`.replace(/\/+/g, '/');
   const text = part.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
   return { text, href };
 });
