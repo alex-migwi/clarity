@@ -35,11 +35,6 @@ draft: false
 
 ## Markdown Basics
 
-```javascript
-function greet(name) {
-  console.log(`Hello, ${name}!`);
-}
-
 ### Text Formatting
 
 - **Bold text** for emphasis
