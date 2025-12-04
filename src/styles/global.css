@@ -114,49 +114,64 @@
   }
 
   /* Typography - Optimized for documentation readability */
+  /* Font weights: Regular (400), Medium (500), Semibold (600), Bold (700) */
   /* Based on Wix guidelines: Body 14-18px, Headings 18-36px, Line height 120-150% */
   .prose h1 {
-    @apply scroll-m-20 text-3xl font-extrabold tracking-tight mb-6 mt-0;
-    font-size: 32px; /* Clear, not overwhelming */
+    @apply scroll-m-20 text-3xl mb-6 mt-0;
+    font-size: 32px;
+    font-weight: 700; /* Bold - clear but not overwhelming */
     line-height: 1.2;
+    letter-spacing: -0.02em; /* Tighter for large text */
   }
 
   .prose h2 {
-    @apply scroll-m-20 pb-2 text-2xl font-bold tracking-tight first:mt-0 mt-12 mb-6;
-    font-size: 24px; /* Standard for section headers */
+    @apply scroll-m-20 pb-2 text-2xl first:mt-0 mt-12 mb-6;
+    font-size: 24px;
+    font-weight: 600; /* Semibold - professional and readable */
     line-height: 1.3;
+    letter-spacing: -0.01em;
     border-bottom: 1px solid hsl(var(--border));
   }
 
   .prose h3 {
-    @apply scroll-m-20 text-xl font-semibold tracking-tight mt-10 mb-4;
-    font-size: 20px; /* Subsection clarity */
+    @apply scroll-m-20 text-xl mt-10 mb-4;
+    font-size: 20px;
+    font-weight: 600; /* Semibold - clear hierarchy */
     line-height: 1.4;
   }
 
   .prose h4 {
-    @apply scroll-m-20 text-lg font-semibold tracking-tight mt-8 mb-3;
-    font-size: 18px; /* Minor sections */
+    @apply scroll-m-20 text-lg mt-8 mb-3;
+    font-size: 18px;
+    font-weight: 600; /* Semibold - distinct but comfortable */
     line-height: 1.4;
   }
 
   .prose h5 {
-    @apply scroll-m-20 text-base font-medium tracking-tight mt-6 mb-3;
-    font-size: 16px; /* Same as body, but bold */
+    @apply scroll-m-20 text-base mt-6 mb-3;
+    font-size: 16px;
+    font-weight: 500; /* Medium - subtle emphasis */
     line-height: 1.5;
   }
 
   .prose h6 {
-    @apply scroll-m-20 text-sm font-medium tracking-tight mt-6 mb-2;
-    font-size: 14px; /* Subtle emphasis */
+    @apply scroll-m-20 text-sm mt-6 mb-2;
+    font-size: 14px;
+    font-weight: 500; /* Medium - gentle distinction */
     line-height: 1.5;
     color: hsl(var(--muted-foreground));
   }
 
   .prose p {
     @apply leading-7 [&:not(:first-child)]:mt-6;
-    font-size: 16px; /* Optimal readability */
+    font-size: 16px;
+    font-weight: 400; /* Regular - optimal for body text */
     line-height: 1.75; /* 28px - comfortable reading */
+  }
+
+  .prose strong,
+  .prose b {
+    font-weight: 600; /* Semibold for emphasis - not too heavy */
   }
 
   .prose blockquote {
