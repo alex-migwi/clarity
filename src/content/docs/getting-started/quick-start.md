@@ -1,7 +1,7 @@
 ---
 title: "Quick Start for Teams"
 description: "Get your team up and running with Clarity in 5 minutes"
-order: 15
+order: 11
 ---
 
 # Quick Start for Teams
@@ -311,4 +311,4 @@ Place images in `public/` folder:
 
 ---
 
-**Your team docs are readyc:/alex/clarity && tail -1 src/content/docs/*.md* íº€
+**Your team docs are readyc:/alex/clarity && tail -1 src/content/docs/*.md* ï¿½ï¿½ï¿½

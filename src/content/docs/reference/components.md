@@ -1,7 +1,7 @@
 ---
 title: "Using Components"
 description: "Learn how to use advanced Clarity components like Callouts, Tabs, and more"
-order: 25
+order: 31
 ---
 
 # Using Advanced Components

@@ -1,7 +1,7 @@
 ---
 title: "Configuration Guide"
 description: "Learn how to customize Clarity for your team using the configuration file"
-order: 20
+order: 30
 ---
 
 # Configuration Guide

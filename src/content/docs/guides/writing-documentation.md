@@ -1,7 +1,7 @@
 ---
 title: "Writing Documentation with Frontmatter"
 description: "A step-by-step tutorial for creating documentation pages in Clarity using frontmatter metadata"
-order: 30
+order: 20
 ---
 
 # Writing Documentation with Frontmatter

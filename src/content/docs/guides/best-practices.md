@@ -1,7 +1,7 @@
 ---
 title: "Writing Documentation"
 description: "A comprehensive guide to writing great documentation with Clarity's features."
-order: 40
+order: 21
 draft: false
 image: ""
 ---
