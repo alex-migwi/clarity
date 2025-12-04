@@ -56,6 +56,38 @@ export const clarityConfig = {
     defaultMode: "system", // "light" | "dark" | "system"
     primaryColor: "zinc", // Tailwind color
   },
+
+  // Homepage customization (optional overrides)
+  // All sections use sensible Clarity defaults unless overridden
+  homepage: {
+    hero: {
+      // tagline: "Custom tagline here", // Optional: override default (uses site.description)
+      // buttons: [ // Optional: override default buttons
+      //   { text: "Get Started", href: "/docs/introduction", style: "primary" },
+      //   { text: "View on GitHub", href: "github", style: "secondary" }, // "github" = auto-link to repo
+      // ],
+    },
+    features: {
+      enabled: true, // Set to false to hide features section
+      // title: "Why {siteName}?", // Optional: override title ({siteName} = replaced with site name)
+      // subtitle: "Custom subtitle", // Optional: override subtitle
+      // items: [ // Optional: provide custom features (otherwise uses Clarity defaults)
+      //   {
+      //     icon: "M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z", // SVG path
+      //     title: "Custom Feature",
+      //     description: "Feature description here",
+      //   },
+      // ],
+    },
+    cta: {
+      enabled: true, // Set to false to hide CTA section
+      // title: "Custom CTA title", // Optional: override title
+      // description: "Custom description with {siteName}", // Optional: override description
+      // buttons: [ // Optional: override buttons
+      //   { text: "Read the Docs", href: "/docs/getting-started", style: "primary" },
+      // ],
+    },
+  },
 };
 
 export type ClarityConfig = typeof clarityConfig;
