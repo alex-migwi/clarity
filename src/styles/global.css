@@ -117,11 +117,11 @@
   /* Font weights: Regular (400), Medium (500), Semibold (600), Bold (700) */
   /* Based on Wix guidelines: Body 14-18px, Headings 18-36px, Line height 120-150% */
   .prose h1 {
-    @apply scroll-m-20 text-3xl mb-6 mt-0;
-    font-size: 32px;
-    font-weight: 700; /* Bold - clear but not overwhelming */
-    line-height: 1.2;
-    letter-spacing: -0.02em; /* Tighter for large text */
+    @apply scroll-m-20 mb-6 mt-0;
+    font-size: 28px; /* Reduced from 32px - comfortable main heading */
+    font-weight: 600; /* Semibold instead of Bold - lighter feel */
+    line-height: 1.3;
+    letter-spacing: -0.01em;
   }
 
   .prose h2 {
