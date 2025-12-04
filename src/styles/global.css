@@ -50,14 +50,21 @@
     border-color: hsl(var(--border));
   }
 
-  html {
-    background-color: hsl(var(--background));
-    color: hsl(var(--foreground));
-  }
-
+  html,
   body {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
+    color-scheme: light;
+  }
+
+  html.dark,
+  html.dark body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    color-scheme: dark;
+  }
+
+  body {
     font-feature-settings: "rlig" 1, "calt" 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
