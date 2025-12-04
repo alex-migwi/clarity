@@ -133,10 +133,10 @@ draft: true
 Show when the page was last modified:
 
 ```yaml
-lastUpdated: 2025-12-04
+lastUpdated: "2025-12-04"
 ```
 
-**Format**: Always use `YYYY-MM-DD`
+**Format**: Always use `YYYY-MM-DD` string format (in quotes)
 
 ## Step 3: Put It All Together
 
@@ -153,7 +153,7 @@ sidebar:
     variant: "info"
 prev: "introduction"
 next: "configuration"
-lastUpdated: 2025-12-04
+lastUpdated: "2025-12-04"
 ---
 
 # Installation Guide
@@ -369,7 +369,7 @@ sidebar:
 prev: "previous-page"
 next: "next-page"
 draft: false
-lastUpdated: 2025-12-04
+lastUpdated: "2025-12-04"
 ---
 ```
 

@@ -1,10 +1,18 @@
 ---
 interface Props {
-  lastUpdated?: Date;
+  lastUpdated?: Date | string;
   contributors?: string[];
 }
 
 const { lastUpdated, contributors } = Astro.props;
+
+// Format date consistently as YYYY-MM-DD (same as frontmatter format)
+const formatDate = (date: Date | string | undefined) => {
+  if (!date) return '';
+  if (typeof date === 'string') return date; // Already in YYYY-MM-DD format
+  // Convert Date object to YYYY-MM-DD
+  return date.toISOString().split('T')[0];
+};
 ---
 
 {(lastUpdated || (contributors && contributors.length > 0)) && (
@@ -15,7 +23,7 @@ const { lastUpdated, contributors } = Astro.props;
           <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
-          <span>Last updated: {lastUpdated.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+          <span>Last updated: {formatDate(lastUpdated)}</span>
         </div>
       )}
       {contributors && contributors.length > 0 && (

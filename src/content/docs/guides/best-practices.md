@@ -221,9 +221,9 @@ Navigation links appear at the bottom to move between documents in order.
 
 ## Next Steps
 
-- Learn about [Configuration](./configuration)
-- Explore [Using Components](./using-components)
-- Set up [Authentication](./authentication-setup)
-- Deploy with the [Deployment Guide](./deployment)
+- Learn about [Configuration](../reference/configuration)
+- Explore [Using Components](../reference/components)
+- Set up [Authentication](../getting-started/authentication)
+- Deploy with the [Deployment Guide](../deployment/index)
 
 Happy documenting!

@@ -268,7 +268,7 @@ Add to any doc:
 ---
 title: "Page Title"
 description: "Description"
-lastUpdated: 2025-12-03
+lastUpdated: "2025-12-03"
 contributors: ["Alice", "Bob"]
 ---
 ```
