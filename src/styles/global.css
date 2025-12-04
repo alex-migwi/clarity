@@ -24,15 +24,6 @@
     --radius: 0.5rem;
   }
 
-  /* Ensure proper contrast with prefers-color-scheme media query */
-  @media (prefers-color-scheme: dark) {
-    :root:not(.dark) {
-      /* Override system dark mode - force light mode colors unless .dark class is present */
-      --background: 0 0% 100%;
-      --foreground: 240 10% 3.9%;
-    }
-  }
-
   .dark {
     --background: 240 10% 3.9%;
     --foreground: 0 0% 98%;
@@ -57,6 +48,11 @@
 
   * {
     border-color: hsl(var(--border));
+  }
+
+  html {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
   }
 
   body {

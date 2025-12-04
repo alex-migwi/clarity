@@ -11,8 +11,8 @@
   },
   {
     "slug": "deployment",
-    "title": "Production Deployment",
-    "content": "# Production Deployment Guide\r\n\r\nThis guide walks you through deploying Clarity to production with full authentication support.\r\n\r\n## Prerequisites\r\n\r\nBefore deploying, ensure you have:\r\n\r\n- A production domain or hosting platform account\r\n- Google Cloud Console account (for Google OAuth)\r\n- GitHub account (for GitHub OAuth)\r\n- Node.js hosting for the backend (Heroku, Railway, DigitalOcean, etc.)\r\n- Static hosting for the frontend (Vercel, Netlify, GitHub Pages, etc.)\r\n\r\n## Step 1: Environment S"
+    "title": "Deployment Guide",
+    "content": "# Deploying Clarity to Your Own Domain\n\nThis complete guide walks you through cloning Clarity, customizing it for your needs, and deploying to production. Whether you want free hosting on GitHub Pages or a custom domain on Vercel/Netlify, we've got you covered.\n\n## Prerequisites\n\nBefore you begin, ensure you have:\n\n- **Node.js 18+** installed ([download](https://nodejs.org))\n- **pnpm** installed (`npm install -g pnpm`)\n- **Git** installed ([download](https://git-scm.com))\n- A **GitHub account** "
   },
   {
     "slug": "getting-started",
