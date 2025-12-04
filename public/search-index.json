@@ -40,6 +40,11 @@
     "content": "# Writing Documentation with Clarity\r\n\r\nThis guide covers best practices for writing documentation and using Clarity's markdown features effectively.\r\n\r\n## Document Structure\r\n\r\n### Frontmatter\r\n\r\nEvery documentation file should start with frontmatter:\r\n\r\n```markdown\r\n---\r\ntitle: Your Page Title\r\ndescription: A brief description for SEO\r\norder: 10\r\ndraft: false\r\n---\r\n```\r\n\r\n**Fields:**\r\n- `title`: Page title (required)\r\n- `description`: SEO meta description (required)\r\n- `order`: Sidebar orderin"
   },
   {
+    "slug": "guides/customizing-homepage",
+    "title": "Welcome to {siteName}",
+    "content": "# Customizing the Homepage\r\n\r\nClarity's homepage is fully customizable through the `clarity.config.ts` file. You can override specific sections, hide elements you don't need, or keep the beautiful defaults. This guide shows you everything you can customize.\r\n\r\n## Understanding the Configuration Pattern\r\n\r\nClarity follows the **\"convention over configuration\"** pattern. This means:\r\n\r\n- ✅ Everything works perfectly with sensible defaults out of the box\r\n- ✅ You only configure what you want to cha"
+  },
+  {
     "slug": "guides/writing-documentation",
     "title": "Writing Documentation with Frontmatter",
     "content": "# Writing Documentation with Frontmatter\r\n\r\nIn this tutorial, you'll learn how to create documentation pages for Clarity by understanding and using frontmatter. By the end, you'll be able to write complete documentation with proper metadata, navigation, and formatting.\r\n\r\n## What You'll Learn\r\n\r\n- What frontmatter is and why it's important\r\n- How to add required and optional metadata fields\r\n- How to organize pages in the sidebar\r\n- How to use Clarity components in your docs\r\n- Common mistakes a"
