@@ -299,16 +299,16 @@ Place images in `public/` folder:
 
 ## Next Steps
 
-- [Full Configuration Guide](./configuration)
-- [Writing Documentation Best Practices](./sample-guide)
-- [Deployment Guide](./getting-started)
+- [Full Configuration Guide](../reference/configuration)
+- [Writing Documentation Best Practices](../guides/best-practices)
+- [Deployment Guide](../deployment/index)
 
 ## Support
 
 - Check the [GitHub repository](https://github.com)
-- Read the [full documentation](./introduction)
+- Read the [full documentation](../introduction)
 - Contact your team administrator
 
 ---
 
-**Your team docs are readyc:/alex/clarity && tail -1 src/content/docs/*.md* ���
+**Your team docs are ready!** 🎉
