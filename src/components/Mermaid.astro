@@ -1,0 +1,31 @@
+---
+// Client-side Mermaid initialization
+---
+
+<script>
+  // Import and initialize Mermaid on the client
+  import mermaid from 'mermaid';
+  
+  // Initialize Mermaid with configuration
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: document.documentElement.classList.contains('dark') ? 'dark' : 'default',
+    securityLevel: 'loose',
+  });
+
+  // Re-render on theme change
+  const observer = new MutationObserver(() => {
+    const isDark = document.documentElement.classList.contains('dark');
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: isDark ? 'dark' : 'default',
+      securityLevel: 'loose',
+    });
+    mermaid.contentLoaded();
+  });
+
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ['class'],
+  });
+</script>

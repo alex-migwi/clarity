@@ -1,7 +1,6 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
-import rehypeMermaid from 'rehype-mermaid';
 
 // https://astro.build/config
 export default defineConfig({
@@ -9,14 +8,7 @@ export default defineConfig({
   base: process.env.PUBLIC_BASE_PATH || '/clarity-docs/',
   integrations: [],
   markdown: {
-    syntaxHighlight: {
-      excludeLangs: ['mermaid'],
-    },
-    rehypePlugins: [
-      [rehypeMermaid, {
-        strategy: 'img-svg', 
-      }],
-    ],
+    syntaxHighlight: 'shiki',
   },
   vite: {
     plugins: [tailwindcss()]

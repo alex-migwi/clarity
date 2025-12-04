@@ -10,6 +10,7 @@ import PrevNext from "../components/PrevNext.astro";
 import CopyCode from "../components/CopyCode.astro";
 import DocMeta from "../components/DocMeta.astro";
 import Feedback from "../components/Feedback.astro";
+import Mermaid from "../components/Mermaid.astro";
 import { clarityConfig } from "../../clarity.config";
 
 const { frontmatter, headings, title, description } = Astro.props;
@@ -178,5 +179,7 @@ const breadcrumbItems = pathParts.map((part, index) => {
             toggleButton?.addEventListener("click", toggleSidebar);
             backdrop?.addEventListener("click", toggleSidebar);
         </script>
+        
+        <Mermaid />
     </body>
 </html>
