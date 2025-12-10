@@ -4,19 +4,19 @@ A premium documentation platform for teams, built with Astro.
 
 ## âœ¨ Features
 
-- í´ **Full-text search** with keyboard shortcuts (âŒ˜K)
-- í´ **OAuth authentication** (Google & GitHub)
-- í³ **Active table of contents** with scroll highlighting
-- í¾¨ **Dark/light theme** with system preference detection
-- í²¬ **Feedback widget** on every documentation page
-- í´— **GitHub integration** for edit links and contributors
-- í³Š **Mermaid diagram** support for visual documentation
-- í¾¯ **SEO optimized** with automatic sitemap generation
-- í·© **Advanced components** (Callouts, Tabs, Code copying)
-- í·ºï¸ **Breadcrumb navigation** for better UX
+- ğŸ” **Full-text search** with keyboard shortcuts (âŒ˜K)
+- ğŸ” **OAuth authentication** (Google & GitHub)
+- ğŸ“‘ **Active table of contents** with scroll highlighting
+- ğŸŒ“ **Dark/light theme** with system preference detection
+- ğŸ’¬ **Feedback widget** on every documentation page
+- ğŸ”— **GitHub integration** for edit links and contributors
+- ğŸ“Š **Mermaid diagram** support for visual documentation
+- ğŸ¯ **SEO optimized** with automatic sitemap generation
+- ğŸ¨ **Advanced components** (Callouts, Tabs, Code copying)
+- ğŸ—ºï¸ **Breadcrumb navigation** for better UX
 - âš¡ **Lightning-fast** static site generation
 
-## íº€ Quick Start
+## ğŸš€ Quick Start
 
 ### Prerequisites
 
@@ -25,7 +25,7 @@ A premium documentation platform for teams, built with Astro.
 
 ### Installation
 
-\`\`\`bash
+```bash
 # Clone repository
 git clone https://github.com/alex-migwi/clarity.git
 cd clarity
@@ -35,23 +35,23 @@ pnpm install
 
 # Start development server
 pnpm dev
-\`\`\`
+```
 
-Visit \`http://localhost:4321\`
+Visit `http://localhost:4321`
 
 ### With Authentication
 
-\`\`\`bash
+```bash
 # Terminal 1 - Start backend
 pnpm backend:dev
 
 # Terminal 2 - Start frontend  
 pnpm dev
-\`\`\`
+```
 
-## í³ Project Structure
+## ğŸ“ Project Structure
 
-\`\`\`text
+```text
 clarity/
 â”œâ”€â”€ src/
 â”‚   â”œâ”€â”€ components/        # UI components (Header, Search, etc.)
@@ -65,13 +65,13 @@ clarity/
 â”œâ”€â”€ scripts/               # Build scripts
 â”œâ”€â”€ clarity.config.ts      # Main configuration
 â””â”€â”€ astro.config.mjs       # Astro configuration
-\`\`\`
+```
 
 ## âš™ï¸ Configuration
 
 Customize Clarity by editing \`clarity.config.ts\`:
 
-\`\`\`typescript
+```typescript
 export const clarityConfig = {
   site: {
     name: "Your Docs",
@@ -88,23 +88,23 @@ export const clarityConfig = {
     copyCodeButton: true,
   },
 };
-\`\`\`
+```
 
-## í· Commands
+## ğŸ“ Commands
 
 | Command | Action |
 |---------|--------|
-| \`pnpm install\` | Install dependencies |
-| \`pnpm dev\` | Start dev server at \`localhost:4321\` |
-| \`pnpm build\` | Build production site to \`./dist/\` |
-| \`pnpm preview\` | Preview production build locally |
-| \`pnpm backend:dev\` | Start authentication backend |
+| `pnpm install` | Install dependencies |
+| `pnpm dev` | Start dev server at `localhost:4321` |
+| `pnpm build` | Build production site to `./dist/` |
+| `pnpm preview` | Preview production build locally |
+| `pnpm backend:dev` | Start authentication backend |
 
-## í³ Writing Docs
+## ğŸ“– Writing Docs
 
 Create markdown files in \`src/content/docs/\`:
 
-\`\`\`markdown
+```markdown
 ---
 title: "Your Page Title"
 description: "Page description for SEO"
@@ -114,24 +114,24 @@ order: 10
 # Your Content
 
 Write documentation using Markdown...
-\`\`\`
+```
 
-## íº¢ Deployment
+## ğŸš€ Deployment
 
-1. **Build**: \`pnpm build\`
-2. **Frontend**: Deploy \`dist/\` to Vercel, Netlify, or GitHub Pages
-3. **Backend**: Deploy \`backend/\` to Railway, Heroku, or DigitalOcean
+1. **Build**: `pnpm build`
+2. **Frontend**: Deploy `dist/` to Vercel, Netlify, or GitHub Pages
+3. **Backend**: Deploy `backend/` to Railway, Heroku, or DigitalOcean
 
 See the [Deployment Guide](./src/content/docs/deployment.md) for detailed instructions.
 
-## í³š Documentation
+## ğŸ“š Documentation
 
 - [Getting Started](./src/content/docs/getting-started.md)
 - [Configuration Guide](./src/content/docs/configuration.md)
 - [Authentication Setup](./src/content/docs/authentication-setup.md)
 - [Deployment Guide](./src/content/docs/deployment.md)
 
-## í´ Contributing
+## ğŸ¤ Contributing
 
 Contributions are welcome! Please see:
 
@@ -144,16 +144,16 @@ Contributions are welcome! Please see:
 4. Push to the branch
 5. Open a Pull Request
 
-## í³„ License
+## ğŸ“„ License
 
 MIT License - feel free to use for personal or commercial projects.
 
-## í¶˜ Support
+## ğŸ’¬ Support
 
-- í³– Check the [documentation](./src/content/docs/)
-- í°› [Open an issue](https://github.com/alex-migwi/clarity/issues)
-- í²¬ [Start a discussion](https://github.com/alex-migwi/clarity/discussions)
+- ğŸ“– Check the [documentation](./src/content/docs/)
+- ğŸ› [Open an issue](https://github.com/alex-migwi/clarity/issues)
+- ğŸ’­ [Start a discussion](https://github.com/alex-migwi/clarity/discussions)
 
 ---
 
-Built with â¤ï¸ using [Astro](https://astro.build)
+Built with â¤ï¸ for Developers using [Astro](https://astro.build)
