@@ -45,9 +45,24 @@
     "content": "# Customizing the Homepage\r\n\r\nClarity's homepage is fully customizable through the `clarity.config.ts` file. You can override specific sections, hide elements you don't need, or keep the beautiful defaults. This guide shows you everything you can customize.\r\n\r\n## Understanding the Configuration Pattern\r\n\r\nClarity follows the **\"convention over configuration\"** pattern. This means:\r\n\r\n- ✅ Everything works perfectly with sensible defaults out of the box\r\n- ✅ You only configure what you want to cha"
   },
   {
+    "slug": "guides/team-docs",
+    "title": "Team Documentation",
+    "content": "# Team Documentation\r\n\r\nThis is a **protected page** that requires authentication to access.\r\n\r\n## Features\r\n\r\nOnly authenticated users can see this content. If you're reading this, you've successfully logged in!\r\n\r\n## Testing\r\n\r\n- ✅ Unauthenticated users should be redirected to login\r\n- ✅ After login, users should be redirected back to this page\r\n- ✅ Authenticated users can access this page directly\r\n\r\n## Next Steps\r\n\r\n- Set up user management\r\n- Configure analytics\r\n- Integrate Stripe billing\r"
+  },
+  {
     "slug": "guides/writing-documentation",
     "title": "Writing Documentation with Frontmatter",
     "content": "# Writing Documentation with Frontmatter\r\n\r\nIn this tutorial, you'll learn how to create documentation pages for Clarity by understanding and using frontmatter. By the end, you'll be able to write complete documentation with proper metadata, navigation, and formatting.\r\n\r\n## What You'll Learn\r\n\r\n- What frontmatter is and why it's important\r\n- How to add required and optional metadata fields\r\n- How to organize pages in the sidebar\r\n- How to use Clarity components in your docs\r\n- Common mistakes a"
+  },
+  {
+    "slug": "internal/index",
+    "title": "Internal Overview",
+    "content": "# Internal Documentation\r\n\r\nThis folder contains internal documentation that requires authentication.\r\n\r\nAll pages in the `internal/` folder should be protected by default.\r\n"
+  },
+  {
+    "slug": "internal/security",
+    "title": "Security Guidelines",
+    "content": "# Security Guidelines\r\n\r\nInternal security documentation.\r\n\r\n## Access Control\r\n\r\n- All internal pages require authentication\r\n- Only team members can view this content\r\n"
   },
   {
     "slug": "introduction",

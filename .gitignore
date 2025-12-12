@@ -26,3 +26,6 @@ backend/.env.local
 
 # jetbrains setting folder
 .idea/
+
+# documents
+.private/

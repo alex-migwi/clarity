@@ -1,0 +1,139 @@
+15:59:15 [types] Generated 14ms
+15:59:18 [content] Syncing content
+15:59:18 [content] Astro config changed
+15:59:18 [content] Clearing content store
+[Shiki] The language "env" doesn't exist, falling back to "plaintext".
+[Shiki] The language "env" doesn't exist, falling back to "plaintext".
+[Shiki] The language "env" doesn't exist, falling back to "plaintext".
+[Shiki] The language "env" doesn't exist, falling back to "plaintext".
+[Shiki] The language "svg" doesn't exist, falling back to "plaintext".
+[Shiki] The language "env" doesn't exist, falling back to "plaintext".
+[Shiki] The language "env" doesn't exist, falling back to "plaintext".
+[Shiki] The language "env" doesn't exist, falling back to "plaintext".
+[Shiki] The language "env" doesn't exist, falling back to "plaintext".
+15:59:33 [content] Synced content
+15:59:33 [vite] Re-optimizing dependencies because lockfile has changed
+
+ astro  v5.13.4 ready in 25151 ms
+
+┃ Local    http://localhost:4321/clarity-docs/
+┃ Network  http://192.168.100.3:4321/clarity-docs/
+           http://172.23.96.1:4321/clarity-docs/
+           http://172.21.224.1:4321/clarity-docs/
+
+15:59:33 watching for file changes...
+16:33:59 [200] / 734ms
+17:15:49 [200] / 253ms
+17:21:57 Configuration file updated. Restarting...
+17:21:57 [watch] astro.config.mjs
+17:21:57 [watch] astro.config.mjs
+[2m5:21:58 PM[22m [31m[1m[vite][22m[39m [31m[2m(ssr)[22m[39m [31mError when evaluating SSR module C:\alex\clarity\astro.config.mjs: Cannot find module '@astrojs/node' imported from 'C:/alex/clarity/astro.config.mjs'[39m
+      at fetchModule (file:///C:/alex/clarity/node_modules/.pnpm/vite@6.3.5_@types+node@24.3_d63ff6a379696a3abb2fa1dce1fc879d/node_modules/vite/dist/node/chunks/dep-DBxKXgDP.js:46813:19)
+      at RunnableDevEnvironment.fetchModule (file:///C:/alex/clarity/node_modules/.pnpm/vite@6.3.5_@types+node@24.3_d63ff6a379696a3abb2fa1dce1fc879d/node_modules/vite/dist/node/chunks/dep-DBxKXgDP.js:47904:12)
+      at fetchModule (file:///C:/alex/clarity/node_modules/.pnpm/vite@6.3.5_@types+node@24.3_d63ff6a379696a3abb2fa1dce1fc879d/node_modules/vite/dist/node/chunks/dep-DBxKXgDP.js:47858:21)
+      at handleInvoke (file:///C:/alex/clarity/node_modules/.pnpm/vite@6.3.5_@types+node@24.3_d63ff6a379696a3abb2fa1dce1fc879d/node_modules/vite/dist/node/chunks/dep-DBxKXgDP.js:38973:28)
+      at EventEmitter.listenerForInvokeHandler (file:///C:/alex/clarity/node_modules/.pnpm/vite@6.3.5_@types+node@24.3_d63ff6a379696a3abb2fa1dce1fc879d/node_modules/vite/dist/node/chunks/dep-DBxKXgDP.js:39046:25)
+      at EventEmitter.emit (node:events:524:28)
+      at Object.send (file:///C:/alex/clarity/node_modules/.pnpm/vite@6.3.5_@types+node@24.3_d63ff6a379696a3abb2fa1dce1fc879d/node_modules/vite/dist/node/chunks/dep-DBxKXgDP.js:25190:40)
+      at Object.invoke (file:///C:/alex/clarity/node_modules/.pnpm/vite@6.3.5_@types+node@24.3_d63ff6a379696a3abb2fa1dce1fc879d/node_modules/vite/dist/node/module-runner.js:621:34)
+      at Object.invoke (file:///C:/alex/clarity/node_modules/.pnpm/vite@6.3.5_@types+node@24.3_d63ff6a379696a3abb2fa1dce1fc879d/node_modules/vite/dist/node/module-runner.js:682:34)
+      at SSRCompatModuleRunner.getModuleInformation (file:///C:/alex/clarity/node_modules/.pnpm/vite@6.3.5_@types+node@24.3_d63ff6a379696a3abb2fa1dce1fc879d/node_modules/vite/dist/node/module-runner.js:1205:94)
+[astro] Unable to load your Astro config
+
+17:22:00 [ERROR] [config] Cannot find module '@astrojs/node' imported from 'C:/alex/clarity/astro.config.mjs'
+  Stack trace:
+    at C:\alex\clarity\node_modules\.pnpm\vite@6.3.5_@types+node@24.3_d63ff6a379696a3abb2fa1dce1fc879d\node_modules\vite\dist\node\chunks\dep-DBxKXgDP.js:46813:19
+    [...] See full stack trace in the browser, or rerun with --verbose.
+
+17:22:01 [ERROR] Continuing with previous valid configuration
+
+17:23:14 [ERROR] transport invoke timed out after 60000ms (data: {"type":"custom","event":"vite:invoke","data":{"name":"fetchModule","id":"send:v7Uhvin-PLEihzJ-JqOqC","data":["/src/styles/global.css","C:/alex/clarity/src/pages/index.astro",{"cached":true,"startOffset":2}]}})
+  Stack trace:
+    at reviveInvokeError (file:///C:/alex/clarity/node_modules/.pnpm/vite@6.3.5_@types+node@24.3_d63ff6a379696a3abb2fa1dce1fc879d/node_modules/vite/dist/node/module-runner.js:548:17)
+    at async SSRCompatModuleRunner.getModuleInformation (file:///C:/alex/clarity/node_modules/.pnpm/vite@6.3.5_@types+node@24.3_d63ff6a379696a3abb2fa1dce1fc879d/node_modules/vite/dist/node/module-runner.js:1205:73)
+    at async eval (C:\alex\clarity\src\pages\index.astro:2:1)
+    at async SSRCompatModuleRunner.directRequest (file:///C:/alex/clarity/node_modules/.pnpm/vite@6.3.5_@types+node@24.3_d63ff6a379696a3abb2fa1dce1fc879d/node_modules/vite/dist/node/module-runner.js:1284:61)
+    at async SSRCompatModuleRunner.cachedRequest (file:///C:/alex/clarity/node_modules/.pnpm/vite@6.3.5_@types+node@24.3_d63ff6a379696a3abb2fa1dce1fc879d/node_modules/vite/dist/node/module-runner.js:1180:76)
+17:23:19 Configuration file updated. Restarting...
+17:23:19 [watch] package.json
+17:23:19 [watch] package.json
+17:23:57 [ERROR] transport was disconnected, cannot call "fetchModule"
+  Stack trace:
+    at reviveInvokeError (file:///C:/alex/clarity/node_modules/.pnpm/vite@6.3.5_@types+node@24.3_d63ff6a379696a3abb2fa1dce1fc879d/node_modules/vite/dist/node/module-runner.js:548:17)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+17:23:58 [ERROR] transport was disconnected, cannot call "fetchModule"
+  Stack trace:
+    at C:\alex\clarity\node_modules\.pnpm\vite@6.3.5_@types+node@24.3_d63ff6a379696a3abb2fa1dce1fc879d\node_modules\vite\dist\node\module-runner.js:548:17
+    [...] See full stack trace in the browser, or rerun with --verbose.
+17:23:58 [ERROR] transport was disconnected, cannot call "fetchModule"
+  Stack trace:
+    at reviveInvokeError (file:///C:/alex/clarity/node_modules/.pnpm/vite@6.3.5_@types+node@24.3_d63ff6a379696a3abb2fa1dce1fc879d/node_modules/vite/dist/node/module-runner.js:548:17)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+17:23:58 [@astrojs/node] Enabling sessions with filesystem storage
+17:24:09 [vite] Re-optimizing dependencies because lockfile has changed
+17:24:22 [content] Syncing content
+17:24:22 [content] Astro config changed
+17:24:22 [content] Clearing content store
+[Shiki] The language "env" doesn't exist, falling back to "plaintext".
+[Shiki] The language "env" doesn't exist, falling back to "plaintext".
+[Shiki] The language "env" doesn't exist, falling back to "plaintext".
+[Shiki] The language "env" doesn't exist, falling back to "plaintext".
+[Shiki] The language "env" doesn't exist, falling back to "plaintext".
+[Shiki] The language "env" doesn't exist, falling back to "plaintext".
+[Shiki] The language "env" doesn't exist, falling back to "plaintext".
+[Shiki] The language "env" doesn't exist, falling back to "plaintext".
+[Shiki] The language "svg" doesn't exist, falling back to "plaintext".
+17:24:54 [content] Synced content
+17:24:54 [types] Generated 46.13s
+17:24:55 [vite] Re-optimizing dependencies because vite config has changed
+17:45:59 Configuration file updated. Restarting...
+17:46:02 [@astrojs/node] Enabling sessions with filesystem storage
+17:46:08 [content] Syncing content
+17:46:08 [content] Astro config changed
+17:46:08 [content] Clearing content store
+[Shiki] The language "env" doesn't exist, falling back to "plaintext".
+[Shiki] The language "env" doesn't exist, falling back to "plaintext".
+[Shiki] The language "env" doesn't exist, falling back to "plaintext".
+[Shiki] The language "env" doesn't exist, falling back to "plaintext".
+[Shiki] The language "env" doesn't exist, falling back to "plaintext".
+[Shiki] The language "env" doesn't exist, falling back to "plaintext".
+[Shiki] The language "env" doesn't exist, falling back to "plaintext".
+[Shiki] The language "env" doesn't exist, falling back to "plaintext".
+[Shiki] The language "svg" doesn't exist, falling back to "plaintext".
+17:46:13 [content] Synced content
+17:46:13 [types] Generated 10.31s
+17:46:13 [vite] Re-optimizing dependencies because vite config has changed
+17:52:30 Configuration file updated. Restarting...
+[config] Astro found issue(s) with your configuration:
+
+! output: Did not match union.
+  > Expected "static" | "server", received "hybrid"
+
+17:52:42 [ERROR] Continuing with previous valid configuration
+
+20:04:59 Configuration file updated. Restarting...
+[config] Astro found issue(s) with your configuration:
+
+! output: Did not match union.
+  > Expected "static" | "server", received "hybrid"
+
+20:05:01 [ERROR] Continuing with previous valid configuration
+
+20:11:08 Configuration file updated. Restarting...
+20:11:09 [@astrojs/node] Enabling sessions with filesystem storage
+20:11:14 [vite] Re-optimizing dependencies because lockfile has changed
+20:11:27 [content] Syncing content
+20:11:27 [content] Astro config changed
+20:11:27 [content] Clearing content store
+[Shiki] The language "env" doesn't exist, falling back to "plaintext".
+[Shiki] The language "env" doesn't exist, falling back to "plaintext".
+[Shiki] The language "env" doesn't exist, falling back to "plaintext".
+[Shiki] The language "env" doesn't exist, falling back to "plaintext".
+[Shiki] The language "env" doesn't exist, falling back to "plaintext".
+[Shiki] The language "env" doesn't exist, falling back to "plaintext".
+[Shiki] The language "svg" doesn't exist, falling back to "plaintext".
+[Shiki] The language "env" doesn't exist, falling back to "plaintext".
+[Shiki] The language "env" doesn't exist, falling back to "plaintext".
+20:11:31 [content] Synced content
+20:11:31 [types] Generated 21.71s
+20:11:31 [vite] Re-optimizing dependencies because lockfile has changed

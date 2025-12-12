@@ -67,14 +67,25 @@ passport.use(new GitHubStrategy({
 }));
 
 // Authentication Routes
+// Store redirect URL before authentication
+app.get('/auth/set-redirect', (req, res) => {
+    const redirectUrl = req.query.redirect;
+    if (redirectUrl) {
+        req.session.redirectAfterLogin = `${FRONTEND_URL}${redirectUrl}`;
+    }
+    res.json({ success: true });
+});
+
 app.get('/auth/google',
     passport.authenticate('google', { scope: ['profile', 'email'] }));
 
 app.get('/auth/google/callback',
     passport.authenticate('google', { failureRedirect: '/login' }),
     (req, res) => {
-        // Successful authentication, redirect home or to a dashboard
-        res.redirect(`${FRONTEND_URL}/dashboard`); // Redirect to Astro frontend
+        // Get redirect URL from session (stored before auth)
+        const redirectUrl = req.session.redirectAfterLogin || `${FRONTEND_URL}/dashboard`;
+        delete req.session.redirectAfterLogin; // Clean up
+        res.redirect(redirectUrl);
     });
 
 app.get('/auth/github',
@@ -83,8 +94,10 @@ app.get('/auth/github',
 app.get('/auth/github/callback',
     passport.authenticate('github', { failureRedirect: '/login' }),
     (req, res) => {
-        // Successful authentication, redirect home or to a dashboard
-        res.redirect(`${FRONTEND_URL}/dashboard`); // Redirect to Astro frontend
+        // Get redirect URL from session (stored before auth)
+        const redirectUrl = req.session.redirectAfterLogin || `${FRONTEND_URL}/dashboard`;
+        delete req.session.redirectAfterLogin; // Clean up
+        res.redirect(redirectUrl);
     });
 
 // User info endpoint

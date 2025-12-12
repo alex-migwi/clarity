@@ -6,6 +6,9 @@ import Footer from "../components/Footer.astro";
 import { clarityConfig } from "../../clarity.config";
 
 const backendUrl = import.meta.env.PUBLIC_BACKEND_URL || 'http://localhost:3000';
+
+// Get redirect parameter from URL
+const redirectUrl = Astro.url.searchParams.get('redirect') || '';
 ---
 
 <html lang="en">
@@ -43,7 +46,8 @@ const backendUrl = import.meta.env.PUBLIC_BACKEND_URL || 'http://localhost:3000'
         <div class="space-y-4">
           <a
             href={`${backendUrl}/auth/google`}
-            class="flex items-center justify-center px-4 py-3 border border-border rounded-md shadow-sm text-sm font-medium text-foreground bg-background hover:bg-muted transition-colors"
+            class="flex items-center justify-center px-4 py-3 border border-border rounded-md shadow-sm text-sm font-medium text-foreground bg-background hover:bg-muted transition-colors oauth-link"
+            data-provider="google"
           >
             <img src="/google-icon.svg" alt="Google" class="h-5 w-5 mr-3" />
             Login with Google
@@ -51,7 +55,8 @@ const backendUrl = import.meta.env.PUBLIC_BACKEND_URL || 'http://localhost:3000'
           
           <a
             href={`${backendUrl}/auth/github`}
-            class="flex items-center justify-center px-4 py-3 border border-border rounded-md shadow-sm text-sm font-medium text-foreground bg-background hover:bg-muted transition-colors"
+            class="flex items-center justify-center px-4 py-3 border border-border rounded-md shadow-sm text-sm font-medium text-foreground bg-background hover:bg-muted transition-colors oauth-link"
+            data-provider="github"
           >
             <img src="/github-icon.svg" alt="GitHub" class="h-5 w-5 mr-3" />
             Login with GitHub
@@ -61,5 +66,30 @@ const backendUrl = import.meta.env.PUBLIC_BACKEND_URL || 'http://localhost:3000'
     </main>
     
     <Footer />
+    
+    <script define:vars={{ backendUrl, redirectUrl }}>
+      // Store redirect URL before OAuth flow
+      if (redirectUrl) {
+        document.querySelectorAll('.oauth-link').forEach(link => {
+          link.addEventListener('click', async (e) => {
+            e.preventDefault();
+            
+            try {
+              // Store redirect URL in backend session
+              await fetch(`${backendUrl}/auth/set-redirect?redirect=${encodeURIComponent(redirectUrl)}`, {
+                credentials: 'include'
+              });
+              
+              // Proceed with OAuth
+              window.location.href = link.getAttribute('href');
+            } catch (error) {
+              console.error('Failed to store redirect URL:', error);
+              // Proceed anyway
+              window.location.href = link.getAttribute('href');
+            }
+          });
+        });
+      }
+    </script>
   </body>
 </html>
