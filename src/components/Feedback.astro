@@ -1,0 +1,137 @@
+---
+import { clarityConfig } from "../../../clarity.config";
+---
+
+{clarityConfig.features.feedback && (
+  <div class="mt-12 pt-8 border-t border-border">
+    <div class="flex flex-col items-center gap-4 p-6 bg-muted/30 rounded-lg">
+      <h3 class="text-lg font-semibold text-foreground">Was this page helpful?</h3>
+      <div class="flex gap-3" id="feedback-buttons">
+        <button
+          data-feedback="yes"
+          class="px-6 py-2.5 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors font-medium flex items-center gap-2"
+        >
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
+          </svg>
+          Yes
+        </button>
+        <button
+          data-feedback="no"
+          class="px-6 py-2.5 bg-secondary text-secondary-foreground rounded-md hover:bg-secondary/80 transition-colors font-medium flex items-center gap-2"
+        >
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14H5.236a2 2 0 01-1.789-2.894l3.5-7A2 2 0 018.736 3h4.018a2 2 0 01.485.06l3.76.94m-7 10v5a2 2 0 002 2h.096c.5 0 .905-.405.905-.904 0-.715.211-1.413.608-2.008L17 13V4m-7 10h2m5-10h2a2 2 0 012 2v6a2 2 0 01-2 2h-2.5" />
+          </svg>
+          No
+        </button>
+      </div>
+      <div id="feedback-message" class="hidden text-center">
+        <p class="text-sm text-muted-foreground">Thank you for your feedback!</p>
+      </div>
+      <div id="feedback-form" class="hidden w-full max-w-md">
+        <textarea
+          id="feedback-text"
+          placeholder="Tell us more (optional)..."
+          class="w-full px-4 py-3 border border-border rounded-md bg-background text-foreground resize-none focus:outline-none focus:ring-2 focus:ring-primary"
+          rows="3"
+        ></textarea>
+        <div class="flex gap-2 mt-3">
+          <button
+            id="submit-feedback"
+            class="px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors text-sm font-medium"
+          >
+            Submit
+          </button>
+          <button
+            id="skip-feedback"
+            class="px-4 py-2 bg-secondary text-secondary-foreground rounded-md hover:bg-secondary/80 transition-colors text-sm font-medium"
+          >
+            Skip
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+)}
+
+<script>
+  function initFeedback() {
+    const buttons = document.getElementById('feedback-buttons');
+    const message = document.getElementById('feedback-message');
+    const form = document.getElementById('feedback-form');
+    const yesBtn = document.querySelector('[data-feedback="yes"]');
+    const noBtn = document.querySelector('[data-feedback="no"]');
+    const submitBtn = document.getElementById('submit-feedback');
+    const skipBtn = document.getElementById('skip-feedback');
+    const feedbackText = document.getElementById('feedback-text') as HTMLTextAreaElement;
+
+    if (!buttons || !message || !form) return;
+
+    let feedbackValue = '';
+
+    function showMessage() {
+      buttons?.classList.add('hidden');
+      form?.classList.add('hidden');
+      message?.classList.remove('hidden');
+    }
+
+    function showForm(value: string) {
+      feedbackValue = value;
+      buttons?.classList.add('hidden');
+      form?.classList.remove('hidden');
+    }
+
+    yesBtn?.addEventListener('click', () => {
+      // For positive feedback, just thank them
+      logFeedback('yes', '');
+      showMessage();
+    });
+
+    noBtn?.addEventListener('click', () => {
+      // For negative feedback, ask for details
+      showForm('no');
+    });
+
+    submitBtn?.addEventListener('click', () => {
+      const comment = feedbackText?.value || '';
+      logFeedback(feedbackValue, comment);
+      showMessage();
+    });
+
+    skipBtn?.addEventListener('click', () => {
+      logFeedback(feedbackValue, '');
+      showMessage();
+    });
+
+    function logFeedback(value: string, comment: string) {
+      const data = {
+        helpful: value,
+        comment: comment,
+        page: window.location.pathname,
+        timestamp: new Date().toISOString(),
+      };
+
+      // Log to console (you can replace this with an API call)
+      console.log('Feedback:', data);
+
+      // Store in localStorage for analytics
+      const feedback = JSON.parse(localStorage.getItem('clarity-feedback') || '[]');
+      feedback.push(data);
+      localStorage.setItem('clarity-feedback', JSON.stringify(feedback));
+
+      // Optional: Send to analytics endpoint
+      // fetch('/api/feedback', {
+      //   method: 'POST',
+      //   headers: { 'Content-Type': 'application/json' },
+      //   body: JSON.stringify(data),
+      // });
+    }
+  }
+
+  // Initialize on page load
+  initFeedback();
+
+  // Re-initialize on page transitions
+  document.addEventListener('astro:page-load', initFeedback);
+</script>

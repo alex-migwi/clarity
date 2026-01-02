@@ -1,0 +1,50 @@
+---
+interface Props {
+    node: {
+        title: string;
+        slug?: string;
+        children?: any[];
+    };
+}
+
+const { node } = Astro.props;
+const base = import.meta.env.BASE_URL || '/';
+const currentPath = Astro.url.pathname;
+const isActive =
+    node.slug &&
+    (currentPath === `${base}docs/${node.slug}` ||
+        currentPath === `${base}docs/${node.slug}/`);
+---
+
+<li class="mt-1">
+    {
+        node.slug ? (
+            <a
+                href={`${base}docs/${node.slug}`}
+                class:list={[
+                    "block py-2 px-3 text-sm rounded-md transition-colors duration-200",
+                    isActive
+                        ? "bg-primary/10 text-primary font-medium"
+                        : "text-muted-foreground hover:text-foreground hover:bg-muted/50",
+                ]}
+            >
+                {node.title}
+            </a>
+        ) : (
+            <span class="block py-2 px-3 text-sm font-semibold text-foreground mt-4 mb-2">
+                {node.title}
+            </span>
+        )
+    }
+    {
+        node.children && node.children.length > 0 && (
+            <div class="ml-3 border-l border-border pl-3">
+                <ul class="space-y-1">
+                    {node.children.map((childNode) => (
+                        <Astro.self node={childNode} />
+                    ))}
+                </ul>
+            </div>
+        )
+    }
+</li>

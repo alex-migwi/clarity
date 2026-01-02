@@ -1,0 +1,64 @@
+services:
+  # Main Clarity Documentation App (Astro SSR)
+  - type: web
+    name: clarity-docs
+    runtime: node
+    region: oregon
+    plan: free
+    buildCommand: pnpm install && pnpm build
+    startCommand: node dist/server/entry.mjs
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: HOST
+        value: 0.0.0.0
+      - key: PORT
+        value: 10000
+      - key: PUBLIC_SITE_NAME
+        value: Clarity
+      - key: PUBLIC_SITE_DESCRIPTION
+        value: A premium documentation platform for teams
+      - key: PUBLIC_SITE_URL
+        value: https://clarity.chanansystems.co.ke
+      - key: PUBLIC_BASE_PATH
+        value: /
+    healthCheckPath: /
+
+  # Backend OAuth Server
+  - type: web
+    name: clarity-backend
+    runtime: node
+    region: oregon
+    plan: free
+    buildCommand: cd backend && pnpm install --prod && pnpm prisma generate && pnpm prisma migrate deploy && pnpm db:seed
+    startCommand: cd backend && node server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: SESSION_SECRET
+        generateValue: true  # Render auto-generates secure secret
+      - key: FRONTEND_URL
+        value: https://clarity.chanansystems.co.ke
+      - key: DEMO_MODE
+        value: true  # Enable hourly database reset for demo
+      - key: DATABASE_URL
+        fromDatabase:
+          name: clarity-db
+          property: connectionString
+      - key: GOOGLE_CLIENT_ID
+        sync: false  # Add in Render dashboard
+      - key: GOOGLE_CLIENT_SECRET
+        sync: false  # Add in Render dashboard
+      - key: GITHUB_CLIENT_ID
+        sync: false  # Add in Render dashboard
+      - key: GITHUB_CLIENT_SECRET
+        sync: false  # Add in Render dashboard
+
+databases:
+  - name: clarity-db
+    databaseName: clarity_db
+    user: clarity_user
+    plan: free  # Free tier (expires after 90 days)
+    region: oregon

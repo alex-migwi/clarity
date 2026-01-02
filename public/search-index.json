@@ -1,0 +1,87 @@
+[
+  {
+    "slug": "deployment/github-pages",
+    "title": "Deploy to GitHub Pages",
+    "content": "# Deploy to GitHub Pages\r\n\r\nDeploy your Clarity documentation to GitHub Pages for free, automated hosting.\r\n\r\n## Prerequisites\r\n\r\n- GitHub account\r\n- Your Clarity repository pushed to GitHub\r\n- Node.js 18+ and pnpm installed locally\r\n\r\n## Step 1: Configure Environment Variables\r\n\r\n### Local Configuration\r\n\r\nCreate or edit `.env` in your project root:\r\n\r\n```env\r\n# Site Configuration\r\nPUBLIC_SITE_NAME=My Documentation\r\nPUBLIC_SITE_DESCRIPTION=Documentation for my project\r\nPUBLIC_SITE_URL=https://y"
+  },
+  {
+    "slug": "deployment/index",
+    "title": "Deployment Overview",
+    "content": "# Deployment Overview\r\n\r\nClarity can be deployed to multiple platforms. Choose the one that best fits your needs.\r\n\r\n## Deployment Options\r\n\r\n### GitHub Pages (Free)\r\n**Best for:** Open source projects, personal documentation\r\n\r\n✅ Free hosting  \r\n✅ Automatic deployment with GitHub Actions  \r\n✅ Custom domains supported  \r\n✅ Built-in SSL certificates  \r\n\r\n**Limitations:**\r\n- Public repositories only (unless you have GitHub Pro)\r\n- Builds can be slower\r\n- Limited to static sites\r\n\r\n[Deploy to GitHu"
+  },
+  {
+    "slug": "deployment/netlify",
+    "title": "Deploy to Netlify",
+    "content": "# Deploy to Netlify\r\n\r\nDeploy your Clarity documentation to Netlify for fast deployments, branch previews, and excellent JAMstack support.\r\n\r\n## Why Netlify?\r\n\r\n- ⚡ **Instant deployments** (30-90 seconds)\r\n- 🔀 **Branch previews** for every branch\r\n- 🆓 **Generous free tier**\r\n- 🔧 **Built-in forms** and serverless functions\r\n- 🌍 **Global CDN**\r\n\r\n## Prerequisites\r\n\r\n- Netlify account ([sign up free](https://app.netlify.com/signup))\r\n- Your Clarity repository on GitHub/GitLab/Bitbucket\r\n- Git r"
+  },
+  {
+    "slug": "deployment/render",
+    "title": "Deploy to Render",
+    "content": "# Deploy to Render\r\n\r\nDeploy your Clarity documentation to Render for hassle-free Node.js hosting with automatic deployments and built-in database support.\r\n\r\n## Why Render?\r\n\r\n- 🚀 **Native Node.js support** - Perfect for Astro SSR\r\n- 🔄 **Auto-deploy** from GitHub\r\n- 🆓 **Free tier** available (auto-sleeps after 15 min)\r\n- 🗄️ **PostgreSQL included** - Ready for v1.1 user management\r\n- 🔒 **Automatic SSL** certificates\r\n- 🌍 **Global CDN** included\r\n- 📊 **Built-in metrics** and logs\r\n\r\n## Pre"
+  },
+  {
+    "slug": "deployment/vercel",
+    "title": "Deploy to Vercel",
+    "content": "# Deploy to Vercel\r\n\r\nDeploy your Clarity documentation to Vercel for lightning-fast builds, instant previews, and a great developer experience.\r\n\r\n## Why Vercel?\r\n\r\n- ⚡ **Lightning fast** deployments (20-60 seconds)\r\n- 🔍 **Preview URLs** for every pull request\r\n- 🌍 **Edge network** for global performance\r\n- 📊 **Built-in analytics** (paid)\r\n- 🆓 **Free tier** for personal projects\r\n\r\n## Prerequisites\r\n\r\n- Vercel account ([sign up free](https://vercel.com/signup))\r\n- Your Clarity repository on"
+  },
+  {
+    "slug": "getting-started/authentication",
+    "title": "Authentication Setup",
+    "content": "# Authentication Setup Guide\n\nClarity includes built-in authentication using OAuth 2.0 with Google and GitHub. This guide walks you through setting up authentication for your documentation site.\n\n## Overview\n\nThe authentication system consists of:\n- **Frontend**: Login page and dashboard built with Astro\n- **Backend**: Node.js/Express server handling OAuth flows\n- **OAuth Providers**: Google and GitHub for social login\n\n## Prerequisites\n\nBefore you begin, you'll need:\n- A Google Cloud Console ac"
+  },
+  {
+    "slug": "getting-started/installation",
+    "title": "getting-started/installation",
+    "content": "# Getting Started with Clarity\n\nThis guide will help you set up Clarity locally and start creating documentation.\n\n## Prerequisites\n\nBefore you begin, ensure you have:\n\n- **Node.js 18+** installed on your system\n- **pnpm** package manager (`npm install -g pnpm`)\n- A code editor (VS Code recommended)\n- Git for version control\n\n## Installation\n\n### 1. Clone the Repository\n\n```bash\ngit clone https://github.com/alex-migwi/clarity.git\ncd clarity\n```\n\n### 2. Install Dependencies\n\nInstall both frontend"
+  },
+  {
+    "slug": "getting-started/quick-start",
+    "title": "Quick Start for Teams",
+    "content": "# Quick Start for Teams\n\nGet Clarity configured and deployed for your team in just a few minutes.\n\n## Step 1: Install Dependencies\n\n```bash\npnpm install\n```\n\n## Step 2: Configure Your Site\n\nEdit `clarity.config.ts` at the root of your project:\n\n```typescript\nexport const clarityConfig = {\n  site: {\n    name: \"Your Team Docs\",\n    description: \"Documentation for your team\",\n    url: \"https://docs.yourcompany.com\",\n    logo: \"/logo.svg\",\n  },\n  \n  github: {\n    enabled: true,\n    repo: \"yourorg/yo"
+  },
+  {
+    "slug": "guides/best-practices",
+    "title": "Writing Documentation",
+    "content": "# Writing Documentation with Clarity\r\n\r\nThis guide covers best practices for writing documentation and using Clarity's markdown features effectively.\r\n\r\n## Document Structure\r\n\r\n### Frontmatter\r\n\r\nEvery documentation file should start with frontmatter:\r\n\r\n```markdown\r\n---\r\ntitle: Your Page Title\r\ndescription: A brief description for SEO\r\norder: 10\r\ndraft: false\r\n---\r\n```\r\n\r\n**Fields:**\r\n- `title`: Page title (required)\r\n- `description`: SEO meta description (required)\r\n- `order`: Sidebar orderin"
+  },
+  {
+    "slug": "guides/customizing-homepage",
+    "title": "Welcome to {siteName}",
+    "content": "# Customizing the Homepage\r\n\r\nClarity's homepage is fully customizable through the `clarity.config.ts` file. You can override specific sections, hide elements you don't need, or keep the beautiful defaults. This guide shows you everything you can customize.\r\n\r\n## Understanding the Configuration Pattern\r\n\r\nClarity follows the **\"convention over configuration\"** pattern. This means:\r\n\r\n- ✅ Everything works perfectly with sensible defaults out of the box\r\n- ✅ You only configure what you want to cha"
+  },
+  {
+    "slug": "guides/team-docs",
+    "title": "Team Documentation",
+    "content": "# Team Documentation\r\n\r\nThis is a **protected page** that requires authentication to access.\r\n\r\n## Features\r\n\r\nOnly authenticated users can see this content. If you're reading this, you've successfully logged in!\r\n\r\n## Testing\r\n\r\n- ✅ Unauthenticated users should be redirected to login\r\n- ✅ After login, users should be redirected back to this page\r\n- ✅ Authenticated users can access this page directly\r\n\r\n## Next Steps\r\n\r\n- Set up user management\r\n- Configure analytics\r\n- Integrate Stripe billing\r"
+  },
+  {
+    "slug": "guides/writing-documentation",
+    "title": "Writing Documentation with Frontmatter",
+    "content": "# Writing Documentation with Frontmatter\r\n\r\nIn this tutorial, you'll learn how to create documentation pages for Clarity by understanding and using frontmatter. By the end, you'll be able to write complete documentation with proper metadata, navigation, and formatting.\r\n\r\n## What You'll Learn\r\n\r\n- What frontmatter is and why it's important\r\n- How to add required and optional metadata fields\r\n- How to organize pages in the sidebar\r\n- How to use Clarity components in your docs\r\n- Common mistakes a"
+  },
+  {
+    "slug": "internal/index",
+    "title": "Internal Overview",
+    "content": "# Internal Documentation\r\n\r\nThis folder contains internal documentation that requires authentication.\r\n\r\nAll pages in the `internal/` folder should be protected by default.\r\n"
+  },
+  {
+    "slug": "internal/security",
+    "title": "Security Guidelines",
+    "content": "# Security Guidelines\r\n\r\nInternal security documentation.\r\n\r\n## Access Control\r\n\r\n- All internal pages require authentication\r\n- Only team members can view this content\r\n"
+  },
+  {
+    "slug": "introduction",
+    "title": "introduction",
+    "content": "# Welcome to Clarity\n\nClarity is a modern, feature-rich documentation platform built with Astro 5. It's designed to help teams create beautiful, searchable, and maintainable documentation with minimal setup.\n\n## Why Clarity?\n\n**Built for Teams**: Clarity provides authentication, role management, and collaboration features out of the box.\n\n**Developer-Friendly**: Write documentation in Markdown, with full TypeScript support and hot reload during development.\n\n**Production-Ready**: Includes OAuth "
+  },
+  {
+    "slug": "reference/components",
+    "title": "Using Components",
+    "content": "# Using Advanced Components\n\nClarity includes powerful components to make your documentation more engaging and interactive.\n\n## Callouts\n\nUse callouts to highlight important information:\n\n### Info Callout\n:::note\nThis is an informational callout. Great for general notes and tips.\n:::\n\n### Warning Callout\n:::warning\nThis is a warning callout. Use it to alert users about potential issues.\n:::\n\n### Danger Callout\n:::danger\nThis is a danger callout. Use for critical warnings that need immediate atte"
+  },
+  {
+    "slug": "reference/configuration",
+    "title": "Configuration Guide",
+    "content": "# Configuration Guide\r\n\r\nClarity is designed to be easily customizable through a single configuration file: `clarity.config.ts`. This guide will walk you through all available options.\r\n\r\n## Configuration File Location\r\n\r\nThe configuration file is located at the root of your project:\r\n\r\n```\r\nclarity.config.ts\r\n```\r\n\r\n## Site Configuration\r\n\r\n### Basic Settings\r\n\r\n```typescript\r\nsite: {\r\n  name: \"Clarity\",\r\n  description: \"A premium documentation platform for teams\",\r\n  url: \"https://clarity.exam"
+  }
+]

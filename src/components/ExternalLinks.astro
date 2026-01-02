@@ -1,0 +1,32 @@
+---
+// Component to make external links open in new tab
+---
+
+<script>
+  function setupExternalLinks() {
+    // Find all links in the document content
+    const links = document.querySelectorAll('article a[href^="http"]');
+    
+    links.forEach(link => {
+      const href = link.getAttribute('href');
+      const currentDomain = window.location.hostname;
+      
+      // Check if link is external (not same domain)
+      try {
+        const linkUrl = new URL(href);
+        if (linkUrl.hostname !== currentDomain) {
+          link.setAttribute('target', '_blank');
+          link.setAttribute('rel', 'noopener noreferrer');
+        }
+      } catch (e) {
+        // Invalid URL, skip
+      }
+    });
+  }
+
+  // Run on page load
+  setupExternalLinks();
+
+  // Re-run after navigation (for client-side routing if added later)
+  document.addEventListener('astro:page-load', setupExternalLinks);
+</script>

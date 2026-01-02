@@ -1,0 +1,29 @@
+{
+  "name": "clarity",
+  "type": "module",
+  "version": "0.0.1",
+  "license": "Apache-2.0",
+  "scripts": {
+    "dev": "astro dev",
+    "prebuild": "node ./scripts/generate-search-index.mjs",
+    "build": "astro build",
+    "preview": "astro preview",
+    "start": "astro preview",
+    "astro": "astro",
+    "backend": "cd backend && node server.js",
+    "backend:dev": "cd backend && node server.js"
+  },
+  "dependencies": {
+    "@astrojs/node": "^9.5.1",
+    "@tailwindcss/vite": "^4.1.12",
+    "astro": "^5.13.4",
+    "mermaid": "^11.12.2",
+    "playwright": "^1.55.0",
+    "rehype-mermaid": "^3.0.0",
+    "tailwindcss": "^4.1.12"
+  },
+  "devDependencies": {
+    "kleur": "^4.1.5",
+    "tsx": "^4.21.0"
+  }
+}

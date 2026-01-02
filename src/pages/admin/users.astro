@@ -1,0 +1,577 @@
+---
+import "../../styles/global.css";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import { clarityConfig } from "../../../../clarity.config";
+
+const base = import.meta.env.BASE_URL || '/';
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Team Members - {clarityConfig.site.name}</title>
+  <script is:inline>
+    // Theme initialization
+    (function() {
+      const getThemePreference = () => {
+        if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
+          return localStorage.getItem("theme");
+        }
+        return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      };
+      const theme = getThemePreference();
+      if (theme === "dark") {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+    })();
+  </script>
+</head>
+<body class="bg-background text-foreground">
+  <Header />
+  
+  <div id="auth-check" class="flex items-center justify-center min-h-screen">
+    <p class="text-muted-foreground">Checking authentication...</p>
+  </div>
+
+  <div id="admin-content" class="min-h-screen hidden pt-16">
+    <!-- Header -->
+    <header class="border-b border-border bg-background sticky top-16 z-10">
+      <div class="container mx-auto px-4 py-4">
+        <div>
+          <h1 class="text-2xl font-bold">Team Management</h1>
+          <p class="text-sm text-muted-foreground">Manage your team members and invitations</p>
+        </div>
+      </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+      <!-- Team Info Section -->
+      <div class="mb-8 rounded-lg border border-border bg-card p-6">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="text-lg font-semibold" id="team-name">Loading...</h2>
+            <p class="text-sm text-muted-foreground">
+              <span id="team-plan">Free Plan</span> • 
+              <span id="team-member-count">0</span>/<span id="team-max-users">1</span> members
+            </p>
+          </div>
+          <button 
+            id="invite-btn"
+            class="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            + Invite Member
+          </button>
+        </div>
+      </div>
+
+      <!-- Members Table -->
+      <div class="rounded-lg border border-border bg-card">
+        <div class="border-b border-border p-4">
+          <h3 class="font-semibold">Team Members</h3>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full">
+            <thead class="border-b border-border bg-muted/50">
+              <tr>
+                <th class="px-4 py-3 text-left text-sm font-medium">Member</th>
+                <th class="px-4 py-3 text-left text-sm font-medium">Role</th>
+                <th class="px-4 py-3 text-left text-sm font-medium">Joined</th>
+                <th class="px-4 py-3 text-right text-sm font-medium">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="members-tbody" class="divide-y divide-border">
+              <tr>
+                <td colspan="4" class="px-4 py-8 text-center text-sm text-muted-foreground">
+                  Loading members...
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Pending Invitations -->
+      <div class="mt-8 rounded-lg border border-border bg-card">
+        <div class="border-b border-border p-4">
+          <h3 class="font-semibold">Pending Invitations</h3>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full">
+            <thead class="border-b border-border bg-muted/50">
+              <tr>
+                <th class="px-4 py-3 text-left text-sm font-medium">Email</th>
+                <th class="px-4 py-3 text-left text-sm font-medium">Role</th>
+                <th class="px-4 py-3 text-left text-sm font-medium">Invited By</th>
+                <th class="px-4 py-3 text-left text-sm font-medium">Expires</th>
+              </tr>
+            </thead>
+            <tbody id="invitations-tbody" class="divide-y divide-border">
+              <tr>
+                <td colspan="4" class="px-4 py-8 text-center text-sm text-muted-foreground">
+                  No pending invitations
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Invite Modal -->
+  <div id="invite-modal" class="fixed inset-0 z-50 hidden" style="display: none;">
+    <div class="fixed inset-0 bg-black/50 backdrop-blur-sm" id="modal-backdrop"></div>
+    <div class="fixed inset-0 flex items-center justify-center p-4" style="pointer-events: none;">
+      <div class="relative w-full max-w-md rounded-lg border shadow-2xl p-6" style="pointer-events: auto; background-color: hsl(var(--card)); border-color: hsl(var(--border));">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="text-lg font-semibold text-foreground">Invite Team Member</h3>
+          <button
+            id="close-modal-btn"
+            class="text-muted-foreground hover:text-foreground transition-colors"
+            aria-label="Close"
+          >
+            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+        
+        <form id="invite-form" class="space-y-4">
+          <div>
+            <label for="invite-email" class="block text-sm font-medium text-foreground mb-2">Email Address</label>
+            <input
+              type="email"
+              id="invite-email"
+              required
+              class="w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent"
+              placeholder="colleague@example.com"
+            />
+          </div>
+
+          <div>
+            <label for="invite-role" class="block text-sm font-medium text-foreground mb-2">Role</label>
+            <select
+              id="invite-role"
+              class="w-full rounded-md border border-input px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent appearance-none cursor-pointer"
+              style="background-color: hsl(var(--background)); background-image: url('data:image/svg+xml;charset=UTF-8,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27currentColor%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3e%3cpolyline points=%276 9 12 15 18 9%27%3e%3c/polyline%3e%3c/svg%3e'); background-repeat: no-repeat; background-position: right 0.5rem center; background-size: 1.25rem; padding-right: 2.5rem;"
+            >
+              <option value="viewer" style="background-color: hsl(var(--background)); color: hsl(var(--foreground));">Viewer - Can view protected docs</option>
+              <option value="editor" style="background-color: hsl(var(--background)); color: hsl(var(--foreground));">Editor - Can edit docs</option>
+              <option value="admin" style="background-color: hsl(var(--background)); color: hsl(var(--foreground));">Admin - Full access</option>
+            </select>
+          </div>
+
+          <div id="invite-error" class="hidden rounded-md bg-destructive/10 border border-destructive/50 p-3 text-sm text-destructive">
+          </div>
+
+          <div class="flex gap-3 pt-2">
+            <button
+              type="submit"
+              class="flex-1 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
+            >
+              Send Invitation
+            </button>
+            <button
+              type="button"
+              id="cancel-invite-btn"
+              class="flex-1 rounded-md border border-border px-4 py-2 text-sm font-medium text-foreground hover:bg-muted transition-colors"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script define:vars={{ base, backendUrl: import.meta.env.PUBLIC_BACKEND_URL || 'http://localhost:3000' }}>
+    const BACKEND_URL = backendUrl;
+    let currentTeamId = null;
+    let currentUserId = null;
+
+    // Fetch current user and their team
+    async function loadUserAndTeam() {
+      try {
+        const userResponse = await fetch(`${BACKEND_URL}/auth/user`, {
+          credentials: 'include'
+        });
+        
+        if (!userResponse.ok) {
+          window.location.href = '/login?redirect=/admin/users';
+          return;
+        }
+
+        const user = await userResponse.json();
+        currentUserId = user.id;
+
+        // Check if user has admin access
+        if (user.role !== 'admin' && user.role !== 'owner') {
+          console.error('User does not have admin privileges');
+          window.location.href = `${base}403`.replace(/\/+/g, '/');
+          return;
+        }
+
+        // Fetch user's teams
+        const teamsResponse = await fetch(`${BACKEND_URL}/api/user/teams`, {
+          credentials: 'include'
+        });
+
+        if (!teamsResponse.ok) {
+          console.error('Failed to load teams');
+          return;
+        }
+
+        const { teams } = await teamsResponse.json();
+        
+        if (!teams || teams.length === 0) {
+          document.getElementById('team-name').textContent = 'No teams found';
+          return;
+        }
+
+        // Use the first team (or team owner's team)
+        const userTeam = teams.find(t => t.ownerId === user.id) || teams[0];
+        currentTeamId = userTeam.id;
+
+        // Update UI with team info
+        document.getElementById('team-name').textContent = userTeam.name;
+        document.getElementById('team-plan').textContent = `${userTeam.plan.charAt(0).toUpperCase() + userTeam.plan.slice(1)} Plan`;
+        document.getElementById('team-max-users').textContent = userTeam.maxUsers;
+        
+        // Check if user can invite (must be admin)
+        const userMembership = userTeam.members.find(m => m.userId === user.id);
+        const canInvite = userMembership?.role === 'admin' || userTeam.ownerId === user.id;
+        
+        const inviteBtn = document.getElementById('invite-btn');
+        if (!canInvite) {
+          inviteBtn.disabled = true;
+          inviteBtn.title = 'Only admins can invite members';
+        }
+
+        // Load members and invitations
+        await Promise.all([loadMembers(), loadInvitations()]);
+        
+      } catch (error) {
+        console.error('Failed to load user:', error);
+      }
+    }
+
+    async function loadTeamData() {
+      // This function is no longer needed - merged into loadUserAndTeam
+    }
+
+    async function loadMembers() {
+      if (!currentTeamId) return;
+
+      try {
+        const response = await fetch(`${BACKEND_URL}/api/teams/${currentTeamId}/members`, {
+          credentials: 'include'
+        });
+
+        if (!response.ok) throw new Error('Failed to load members');
+
+        const data = await response.json();
+        renderMembers(data.members);
+      } catch (error) {
+        console.error('Failed to load members:', error);
+        document.getElementById('members-tbody').innerHTML = `
+          <tr>
+            <td colspan="4" class="px-4 py-8 text-center text-sm text-red-600">
+              Failed to load members
+            </td>
+          </tr>
+        `;
+      }
+    }
+
+    async function loadInvitations() {
+      if (!currentTeamId) return;
+
+      try {
+        const response = await fetch(`${BACKEND_URL}/api/teams/${currentTeamId}/invitations`, {
+          credentials: 'include'
+        });
+
+        if (!response.ok) throw new Error('Failed to load invitations');
+
+        const data = await response.json();
+        renderInvitations(data.invitations);
+      } catch (error) {
+        console.error('Failed to load invitations:', error);
+      }
+    }
+
+    function renderMembers(members) {
+      const tbody = document.getElementById('members-tbody');
+      
+      if (!members || members.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="4" class="px-4 py-8 text-center text-sm text-muted-foreground">
+              No team members yet
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      tbody.innerHTML = members.map(member => `
+        <tr>
+          <td class="px-4 py-3">
+            <div class="flex items-center gap-3">
+              ${member.user.avatar ? 
+                `<img src="${member.user.avatar}" alt="${member.user.name}" class="h-8 w-8 rounded-full" />` :
+                `<div class="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center text-sm font-medium">
+                  ${member.user.name?.[0]?.toUpperCase() || 'U'}
+                </div>`
+              }
+              <div>
+                <div class="text-sm font-medium">${member.user.name || 'Unknown'}</div>
+                <div class="text-xs text-muted-foreground">${member.user.email}</div>
+              </div>
+            </div>
+          </td>
+          <td class="px-4 py-3">
+            ${member.userId !== currentUserId ? `
+              <select 
+                class="role-select px-3 py-1.5 text-sm rounded-md border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-colors cursor-pointer hover:border-primary/50"
+                data-user-id="${member.userId}"
+                data-current-role="${member.role}"
+                onchange="handleRoleChange(this)"
+              >
+                <option value="viewer" ${member.role === 'viewer' ? 'selected' : ''}>👁️ Viewer</option>
+                <option value="editor" ${member.role === 'editor' ? 'selected' : ''}>✏️ Editor</option>
+                <option value="admin" ${member.role === 'admin' ? 'selected' : ''}>⚡ Admin</option>
+              </select>
+            ` : `
+              <span class="inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium border bg-primary/10 text-primary border-primary/20">
+                ${member.role.charAt(0).toUpperCase() + member.role.slice(1)}
+              </span>
+              <p class="text-xs text-muted-foreground mt-1">Your role</p>
+            `}
+          </td>
+          <td class="px-4 py-3 text-sm text-muted-foreground">
+            ${new Date(member.joinedAt).toLocaleDateString()}
+          </td>
+          <td class="px-4 py-3 text-right">
+            ${member.userId !== currentUserId ? `
+              <button class="text-sm text-destructive hover:text-destructive/80 transition-colors" onclick="removeMember('${member.userId}')">
+                Remove
+              </button>
+            ` : '<span class="text-xs text-muted-foreground">You</span>'}
+          </td>
+        </tr>
+      `).join('');
+
+      // Update member count
+      document.getElementById('team-member-count').textContent = members.length;
+    }
+
+    function renderInvitations(invitations) {
+      const tbody = document.getElementById('invitations-tbody');
+      
+      if (!invitations || invitations.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="4" class="px-4 py-8 text-center text-sm text-muted-foreground">
+              No pending invitations
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      tbody.innerHTML = invitations.map(inv => `
+        <tr>
+          <td class="px-4 py-3 text-sm">${inv.email}</td>
+          <td class="px-4 py-3">
+            <span class="inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium border
+              ${inv.role === 'admin' ? 'bg-primary/10 text-primary border-primary/20' : 
+                inv.role === 'editor' ? 'bg-accent text-accent-foreground border-border' :
+                'bg-muted text-muted-foreground border-border'}">
+              ${inv.role.charAt(0).toUpperCase() + inv.role.slice(1)}
+            </span>
+          </td>
+          <td class="px-4 py-3 text-sm text-muted-foreground">
+            ${inv.invitedBy.name || inv.invitedBy.email}
+          </td>
+          <td class="px-4 py-3 text-sm text-muted-foreground">
+            ${new Date(inv.expiresAt).toLocaleDateString()}
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    // Modal handling
+    const modal = document.getElementById('invite-modal');
+    const inviteBtn = document.getElementById('invite-btn');
+    const cancelBtn = document.getElementById('cancel-invite-btn');
+    const closeBtn = document.getElementById('close-modal-btn');
+    const modalBackdrop = document.getElementById('modal-backdrop');
+
+    function openModal() {
+      if (modal) {
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closeModal() {
+      if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+        document.getElementById('invite-form')?.reset();
+        document.getElementById('invite-error')?.classList.add('hidden');
+      }
+    }
+
+    inviteBtn?.addEventListener('click', openModal);
+    cancelBtn?.addEventListener('click', closeModal);
+    closeBtn?.addEventListener('click', closeModal);
+    modalBackdrop?.addEventListener('click', closeModal);
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal?.style.display === 'block') {
+        closeModal();
+      }
+    });
+
+    // Invite form submission
+    document.getElementById('invite-form')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const email = document.getElementById('invite-email').value;
+      const role = document.getElementById('invite-role').value;
+      const errorEl = document.getElementById('invite-error');
+
+      try {
+        const response = await fetch(`${BACKEND_URL}/api/teams/${currentTeamId}/invite`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
+          body: JSON.stringify({ email, role })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          errorEl.textContent = data.error || 'Failed to send invitation';
+          errorEl.classList.remove('hidden');
+          return;
+        }
+
+        // Success - close modal and reload data
+        closeModal();
+        await loadInvitations();
+        document.getElementById('invite-modal').classList.remove('flex');
+        document.getElementById('invite-form').reset();
+        errorEl.classList.add('hidden');
+        
+        await loadInvitations();
+        alert('Invitation sent successfully!');
+      } catch (error) {
+        errorEl.textContent = 'Network error. Please try again.';
+        errorEl.classList.remove('hidden');
+      }
+    });
+
+    async function removeMember(userId) {
+      if (!confirm('Are you sure you want to remove this member?')) return;
+
+      try {
+        const response = await fetch(`${BACKEND_URL}/api/teams/${currentTeamId}/members/${userId}`, {
+          method: 'DELETE',
+          credentials: 'include'
+        });
+
+        if (!response.ok) throw new Error('Failed to remove member');
+
+        await loadMembers();
+        alert('Member removed successfully');
+      } catch (error) {
+        console.error('Failed to remove member:', error);
+        alert('Failed to remove member');
+      }
+    }
+
+    // Handle role change
+    async function handleRoleChange(selectElement) {
+      const userId = selectElement.dataset.userId;
+      const currentRole = selectElement.dataset.currentRole;
+      const newRole = selectElement.value;
+      
+      if (newRole === currentRole) return;
+      
+      if (!confirm(`Change user role to ${newRole}?`)) {
+        selectElement.value = currentRole; // Revert
+        return;
+      }
+      
+      try {
+        selectElement.disabled = true;
+        
+        const response = await fetch(`${BACKEND_URL}/api/teams/${currentTeamId}/members/${userId}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
+          body: JSON.stringify({ role: newRole })
+        });
+        
+        if (!response.ok) {
+          const error = await response.json();
+          throw new Error(error.error || 'Failed to update role');
+        }
+        
+        // Update current role
+        selectElement.dataset.currentRole = newRole;
+        alert(`Role updated to ${newRole} successfully`);
+      } catch (error) {
+        console.error('Failed to update role:', error);
+        alert(`Failed to update role: ${error.message}`);
+        selectElement.value = currentRole; // Revert on error
+      } finally {
+        selectElement.disabled = false;
+      }
+    }
+
+    // Make functions available globally
+    window.removeMember = removeMember;
+    window.handleRoleChange = handleRoleChange;
+
+    // Auth check before initializing
+    async function checkAuth() {
+      const authCheckEl = document.getElementById('auth-check');
+      const adminContentEl = document.getElementById('admin-content');
+      
+      try {
+        const response = await fetch(`${BACKEND_URL}/auth/user`, {
+          credentials: 'include',
+          mode: 'cors'
+        });
+        
+        if (!response.ok) {
+          // Not authenticated
+          window.location.href = `${base}login?redirect=${encodeURIComponent('/admin/users')}`.replace(/\/+/g, '/');
+          return;
+        }
+        
+        // Authenticated - show content and load data
+        authCheckEl.classList.add('hidden');
+        adminContentEl.classList.remove('hidden');
+        loadUserAndTeam();
+      } catch (error) {
+        console.error('Auth check failed:', error);
+        window.location.href = `${base}login`.replace(/\/+/g, '/');
+      }
+    }
+    
+    // Run auth check on page load
+    checkAuth();
+  </script>
+</body>
+</html>

@@ -1,0 +1,164 @@
+---
+// src/pages/dashboard.astro
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import ThemeToggle from "../components/ThemeToggle.astro";
+import { clarityConfig } from "../../../clarity.config";
+
+// Get base path from environment
+const base = import.meta.env.BASE_URL || '/';
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Dashboard - {clarityConfig.site.name}</title>
+    <script is:inline>
+      // Theme initialization - must run before page renders
+      (function() {
+        const getThemePreference = () => {
+          if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
+            return localStorage.getItem("theme");
+          }
+          return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        };
+        const theme = getThemePreference();
+        if (theme === "dark") {
+          document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+        }
+      })();
+    </script>
+  </head>
+  <body class="bg-background text-foreground">
+    <Header />
+    
+    <main class="flex items-center justify-center min-h-[calc(100vh-4rem)] pt-16">
+      <div class="p-8 bg-card border border-border rounded-lg shadow-lg w-full max-w-2xl">
+        <h1 class="text-3xl font-bold mb-6 text-center text-foreground">Dashboard</h1>
+
+        <div id="dashboard-content" class="text-center">
+          <p class="mb-4 text-muted-foreground">Loading...</p>
+        </div>
+      </div>
+    </main>
+    
+    <Footer />
+
+    <script define:vars={{ base, backendUrl: import.meta.env.PUBLIC_BACKEND_URL || 'http://localhost:3000' }}>
+        const BACKEND_URL = backendUrl;
+        
+        console.log('Dashboard script loaded, base:', base);
+        
+        async function loadDashboard() {
+            const contentDiv = document.getElementById('dashboard-content');
+            
+            if (!contentDiv) {
+                console.error('Dashboard content div not found!');
+                return;
+            }
+            
+            try {
+                console.log('Fetching user from backend:', `${BACKEND_URL}/auth/user`);
+                const response = await fetch(`${BACKEND_URL}/auth/user`, {
+                    credentials: 'include',
+                    mode: 'cors',
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                console.log('Response received:', response.status, response.statusText);
+                
+                if (!response.ok) {
+                    // Not authenticated - redirect to login
+                    console.log('Not authenticated, redirecting to login');
+                    const redirectUrl = `${base}login?redirect=${encodeURIComponent('/dashboard')}`.replace(/\/+/g, '/');
+                    console.log('Redirect URL:', redirectUrl);
+                    window.location.href = redirectUrl;
+                    return;
+                }
+                
+                const user = await response.json();
+                
+                // Show dashboard content
+                contentDiv.innerHTML = `
+                    <div class="mb-8">
+                        <p class="text-2xl font-semibold mb-2 text-foreground">Welcome, ${user.name || user.displayName || user.username || 'User'}!</p>
+                        <p class="text-sm text-muted-foreground">Email: ${user.email || 'N/A'}</p>
+                    </div>
+                    
+                    <div class="space-y-3 mb-6">
+                        <a
+                            href="${base}admin/users"
+                            class="block px-4 py-3 border border-border rounded-md text-sm font-medium text-foreground bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+                        >
+                            Manage Team Members
+                        </a>
+                        <a
+                            href="${base}docs/introduction"
+                            class="block px-4 py-3 border border-border rounded-md text-sm font-medium text-foreground bg-background hover:bg-muted transition-colors"
+                        >
+                            View Documentation
+                        </a>
+                    </div>
+
+                    <button
+                        id="dashboard-logout-btn"
+                        class="inline-block px-4 py-3 border border-destructive rounded-md text-sm font-medium text-destructive-foreground bg-destructive hover:bg-destructive/90 transition-colors cursor-pointer"
+                    >
+                        Logout
+                    </button>
+                `;
+            } catch (error) {
+                console.error('Failed to load dashboard:', error);
+                console.error('Error details:', error.message, error.stack);
+                contentDiv.innerHTML = `
+                    <p class="mb-6 text-destructive">Failed to load dashboard. Please try again.</p>
+                    <p class="mb-6 text-sm text-muted-foreground">Error: ${error.message}</p>
+                    <a
+                        href="${base}login"
+                        class="inline-block px-4 py-3 border border-border rounded-md text-sm font-medium text-primary-foreground bg-primary hover:bg-primary/90 transition-colors"
+                    >
+                        Go to Login
+                    </a>
+                `;
+            }
+        }
+        
+        // Handle dashboard logout button
+        function setupLogoutButton() {
+            const logoutBtn = document.getElementById('dashboard-logout-btn');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', async () => {
+                    try {
+                        await fetch(`${BACKEND_URL}/auth/logout`, {
+                            method: 'GET',
+                            credentials: 'include'
+                        });
+                        window.location.href = `${base}login`.replace(/\/+/g, '/');
+                    } catch (error) {
+                        console.error('Logout failed:', error);
+                        window.location.href = `${base}login`.replace(/\/+/g, '/');
+                    }
+                });
+            }
+        }
+        
+        // Run on page load
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', async () => {
+                await loadDashboard();
+                setupLogoutButton();
+            });
+        } else {
+            loadDashboard().then(setupLogoutButton);
+        }
+    </script>
+  </body>
+</html>oadDashboard();
+    </script>
+</Layout>

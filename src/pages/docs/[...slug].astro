@@ -1,0 +1,44 @@
+---
+import { getCollection } from "astro:content";
+import DocLayout from "../../layouts/DocLayout.astro";
+import PrevNext from "../../components/PrevNext.astro";
+
+// Disable prerendering to enable middleware
+export const prerender = false;
+
+const base = import.meta.env.BASE_URL;
+const { slug } = Astro.params;
+
+// Get all docs
+const docEntries = await getCollection("docs", ({ data }) => {
+  return import.meta.env.PROD ? data.draft !== true : true;
+});
+
+// Sort by order field
+const sortedEntries = docEntries.sort((a, b) => {
+  const orderA = a.data.order ?? 999;
+  const orderB = b.data.order ?? 999;
+  return orderA - orderB;
+});
+
+// Find current entry
+const entry = sortedEntries.find(e => e.slug === slug);
+if (!entry) {
+  return Astro.redirect('/404');
+}
+
+// Find prev/next
+const currentIndex = sortedEntries.findIndex(e => e.slug === slug);
+const prev = currentIndex > 0 ? sortedEntries[currentIndex - 1] : null;
+const next = currentIndex < sortedEntries.length - 1 ? sortedEntries[currentIndex + 1] : null;
+
+const prevLink = prev ? { title: prev.data.title, href: `${base}docs/${prev.slug}`.replace(/\/+/g, '/') } : undefined;
+const nextLink = next ? { title: next.data.title, href: `${base}docs/${next.slug}`.replace(/\/+/g, '/') } : undefined;
+
+const { Content, headings } = await entry.render();
+---
+
+<DocLayout frontmatter={entry.data} headings={headings}>
+  <Content />
+  <PrevNext prev={prevLink} next={nextLink} />
+</DocLayout>

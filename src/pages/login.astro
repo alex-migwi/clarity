@@ -1,0 +1,96 @@
+---
+// src/pages/login.astro
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { clarityConfig } from "../../../clarity.config";
+
+const backendUrl = import.meta.env.PUBLIC_BACKEND_URL || 'http://localhost:3000';
+const base = import.meta.env.BASE_URL || '/';
+
+// Get redirect parameter from URL
+const redirectUrl = Astro.url.searchParams.get('redirect') || '';
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Login - {clarityConfig.site.name}</title>
+    <script is:inline>
+      // Theme initialization - must run before page renders
+      (function() {
+        const getThemePreference = () => {
+          if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
+            return localStorage.getItem("theme");
+          }
+          return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        };
+        const theme = getThemePreference();
+        if (theme === "dark") {
+          document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+        }
+      })();
+    </script>
+  </head>
+  <body class="bg-background text-foreground">
+    <Header />
+    
+    <main class="flex items-center justify-center min-h-[calc(100vh-4rem)] pt-16">
+      <div class="p-8 bg-card border border-border rounded-lg shadow-lg w-96">
+        <h1 class="text-3xl font-bold mb-6 text-center text-foreground">Login</h1>
+        
+        <p class="mb-6 text-center text-muted-foreground">Choose your preferred social login method:</p>
+        
+        <div class="space-y-4">
+          <a
+            href={`${backendUrl}/auth/google`}
+            class="flex items-center justify-center px-4 py-3 border border-border rounded-md shadow-sm text-sm font-medium text-foreground bg-background hover:bg-muted transition-colors oauth-link"
+            data-provider="google"
+          >
+            <img src={`${base}google-icon.svg`} alt="Google" class="h-5 w-5 mr-3" />
+            Login with Google
+          </a>
+          
+          <a
+            href={`${backendUrl}/auth/github`}
+            class="flex items-center justify-center px-4 py-3 border border-border rounded-md shadow-sm text-sm font-medium text-foreground bg-background hover:bg-muted transition-colors oauth-link"
+            data-provider="github"
+          >
+            <img src={`${base}github-icon.svg`} alt="GitHub" class="h-5 w-5 mr-3" />
+            Login with GitHub
+          </a>
+        </div>
+      </div>
+    </main>
+    
+    <Footer />
+    
+    <script define:vars={{ backendUrl, redirectUrl }}>
+      // Store redirect URL before OAuth flow
+      if (redirectUrl) {
+        document.querySelectorAll('.oauth-link').forEach(link => {
+          link.addEventListener('click', async (e) => {
+            e.preventDefault();
+            
+            try {
+              // Store redirect URL in backend session
+              await fetch(`${backendUrl}/auth/set-redirect?redirect=${encodeURIComponent(redirectUrl)}`, {
+                credentials: 'include'
+              });
+              
+              // Proceed with OAuth
+              window.location.href = link.getAttribute('href');
+            } catch (error) {
+              console.error('Failed to store redirect URL:', error);
+              // Proceed anyway
+              window.location.href = link.getAttribute('href');
+            }
+          });
+        });
+      }
+    </script>
+  </body>
+</html>

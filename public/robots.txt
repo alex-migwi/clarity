@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: ${import.meta.env.SITE || 'https://clarity.example.com'}/sitemap.xml

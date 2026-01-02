@@ -1,0 +1,81 @@
+---
+import { getCollection } from "astro:content";
+import SidebarNode from "./SidebarNode.astro";
+
+const docs = await getCollection("docs", ({ data }) => {
+    return import.meta.env.PROD ? data.draft !== true : true;
+});
+
+function formatTitle(slug: string) {
+    const overrides: Record<string, string> = {
+        bnpl: "BNPL",
+        api: "API",
+        ui: "UI",
+        ux: "UX",
+    };
+    const lowerSlug = slug.toLowerCase();
+    if (overrides[lowerSlug]) return overrides[lowerSlug];
+
+    return slug
+        .split(/[-_]/)
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(" ");
+}
+
+function buildTree(docs) {
+    const tree = [];
+    docs.forEach((doc) => {
+        const pathParts = doc.slug.split("/");
+        let currentNode = tree;
+
+        pathParts.forEach((part, index) => {
+            let existingNode = currentNode.find(
+                (node) => node.slugPart === part,
+            );
+
+            if (!existingNode) {
+                existingNode = {
+                    title:
+                        index === pathParts.length - 1
+                            ? doc.data.title
+                            : formatTitle(part),
+                    slugPart: part,
+                    children: [],
+                };
+                currentNode.push(existingNode);
+            }
+
+            if (index === pathParts.length - 1) {
+                existingNode.slug = doc.slug;
+                existingNode.title = doc.data.title;
+                existingNode.order = doc.data.order ?? 999;
+            }
+            currentNode = existingNode.children;
+        });
+    });
+
+    // Sort nodes by order, then by title
+    const sortNodes = (nodes) => {
+        nodes.sort((a, b) => {
+            const orderA = a.order ?? 999;
+            const orderB = b.order ?? 999;
+            if (orderA !== orderB) return orderA - orderB;
+            return a.title.localeCompare(b.title);
+        });
+        nodes.forEach((node) => {
+            if (node.children.length > 0) sortNodes(node.children);
+        });
+    };
+
+    sortNodes(tree);
+    return tree;
+}
+
+const sidebarTree = buildTree(docs);
+---
+
+<nav class="h-full px-4 py-6 overflow-y-auto">
+    <ul class="space-y-1">
+        {sidebarTree.map((node) => <SidebarNode node={node} />)}
+    </ul>
+</nav>
