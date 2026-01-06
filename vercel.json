@@ -12,7 +12,7 @@
     }
   ],
   "env": {
-    "PUBLIC_SITE_URL": "https://databridge-docs.vercel.app",
+    "PUBLIC_SITE_URL": "https://databridge.chanansystems.co.ke",
     "PUBLIC_BASE_PATH": "/"
   }
 }
