@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro';
 import { getCollection } from 'astro:content';
-import { clarityConfig } from '../../../clarity.config';
+import { clarityConfig } from '@/config';
 
 export const GET: APIRoute = async ({ site }) => {
   const allDocs = await getCollection('docs', ({ data }) => {

@@ -3,7 +3,7 @@
  * Converts glob patterns from clarity.config.ts to RegExp for middleware
  */
 
-import { clarityConfig } from '../../../clarity.config';
+import { clarityConfig } from '@/config';
 
 export type UserRole = 'owner' | 'admin' | 'editor' | 'viewer';
 

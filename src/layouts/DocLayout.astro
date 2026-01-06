@@ -12,7 +12,7 @@ import DocMeta from "../components/DocMeta.astro";
 import Feedback from "../components/Feedback.astro";
 import Mermaid from "../components/Mermaid.astro";
 import ExternalLinks from "../components/ExternalLinks.astro";
-import { clarityConfig } from "../../../clarity.config";
+import { clarityConfig } from '@/config';
 
 const { frontmatter, headings, title, description } = Astro.props;
 const pageTitle = title || frontmatter?.title || "Clarity";
