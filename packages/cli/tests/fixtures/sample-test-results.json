@@ -1,0 +1,56 @@
+{
+  "numTotalTestSuites": 2,
+  "numPassedTestSuites": 2,
+  "numFailedTestSuites": 0,
+  "numPendingTestSuites": 0,
+  "numTotalTests": 5,
+  "numPassedTests": 4,
+  "numFailedTests": 1,
+  "numPendingTests": 0,
+  "testResults": [
+    {
+      "name": "backend/routes/license.test.js",
+      "status": "passed",
+      "assertionResults": [
+        {
+          "title": "should validate license successfully",
+          "status": "passed",
+          "duration": 45,
+          "failureMessages": []
+        },
+        {
+          "title": "should reject invalid license",
+          "status": "passed",
+          "duration": 32,
+          "failureMessages": []
+        },
+        {
+          "title": "should reject expired license",
+          "status": "failed",
+          "duration": 28,
+          "failureMessages": [
+            "Error: Expected license to be expired\n    at Object.<anonymous> (backend/routes/license.test.js:45:23)"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "backend/routes/metadata.test.js",
+      "status": "passed",
+      "assertionResults": [
+        {
+          "title": "should create artifact",
+          "status": "passed",
+          "duration": 67,
+          "failureMessages": []
+        },
+        {
+          "title": "should upload test results",
+          "status": "passed",
+          "duration": 53,
+          "failureMessages": []
+        }
+      ]
+    }
+  ]
+}

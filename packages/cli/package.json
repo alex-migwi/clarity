@@ -1,0 +1,33 @@
+{
+  "name": "@clarity/cli",
+  "version": "0.1.0",
+  "description": "Clarity CLI for metadata collection and affected test detection",
+  "main": "src/index.js",
+  "type": "commonjs",
+  "bin": {
+    "clarity": "./bin/clarity.js"
+  },
+  "scripts": {
+    "test": "vitest",
+    "test:watch": "vitest --watch"
+  },
+  "keywords": [
+    "clarity",
+    "documentation",
+    "metadata",
+    "cli",
+    "testing"
+  ],
+  "author": "Clarity Team",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^11.1.0",
+    "simple-git": "^3.21.0",
+    "glob": "^10.3.10",
+    "axios": "^1.6.2"
+  },
+  "devDependencies": {
+    "vitest": "^1.0.4",
+    "@types/node": "^20.10.5"
+  }
+}

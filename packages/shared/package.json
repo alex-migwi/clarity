@@ -1,0 +1,14 @@
+{
+  "name": "@clarity/shared",
+  "version": "0.1.0",
+  "description": "Shared utilities for Clarity Team and Enterprise packages",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "test": "echo \"Shared package tests\""
+  },
+  "keywords": ["clarity", "shared", "utilities"],
+  "license": "PROPRIETARY"
+}
